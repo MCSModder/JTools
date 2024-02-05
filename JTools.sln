@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JTools", "Src\JTools\JTools.csproj", "{42CB9B33-379F-4707-95EB-D6C34CAFCF83}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JTools_Next", "Src\JTools_Next\JTools_Next.csproj", "{70C13368-4DC1-4C66-99FF-352531F1FDB0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{42CB9B33-379F-4707-95EB-D6C34CAFCF83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42CB9B33-379F-4707-95EB-D6C34CAFCF83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42CB9B33-379F-4707-95EB-D6C34CAFCF83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42CB9B33-379F-4707-95EB-D6C34CAFCF83}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70C13368-4DC1-4C66-99FF-352531F1FDB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70C13368-4DC1-4C66-99FF-352531F1FDB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70C13368-4DC1-4C66-99FF-352531F1FDB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70C13368-4DC1-4C66-99FF-352531F1FDB0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

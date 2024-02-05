@@ -1,0 +1,6 @@
+.idea/
+Bin/
+**/bin/
+obj/
+**/obj/
+packages/

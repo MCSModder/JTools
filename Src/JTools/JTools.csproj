@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+
+    <!--  项目基本配置信息  -->
+    <PropertyGroup>
+        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+        <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+        <ProjectGuid>{42CB9B33-379F-4707-95EB-D6C34CAFCF83}</ProjectGuid>
+        <OutputType>Library</OutputType>
+        <AppDesignerFolder>Properties</AppDesignerFolder>
+        <RootNamespace>TierneyJohn.MiChangSheng.JTools</RootNamespace>
+        <AssemblyName>JTools</AssemblyName>
+        <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+        <FileAlignment>512</FileAlignment>
+    </PropertyGroup>
+
+    <!--  Debug 编译配置  -->
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugSymbols>true</DebugSymbols>
+        <DebugType>full</DebugType>
+        <Optimize>false</Optimize>
+        <OutputPath>../../Bin/Debug/</OutputPath>
+        <DefineConstants>DEBUG;TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+
+    <!--  Release 编译配置  -->
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugType>pdbonly</DebugType>
+        <Optimize>true</Optimize>
+        <OutputPath>../../Bin/Release/</OutputPath>
+        <DefineConstants>TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+
+    <!--  项目文件配置  -->
+    <ItemGroup>
+        <Compile Include="Fungus\JCommand\JAddTime.cs" />
+        <Compile Include="Fungus\JCommand\JHideCg.cs" />
+        <Compile Include="Fungus\JCommand\JLearningSkill.cs" />
+        <Compile Include="Fungus\JCommand\JLearningStaticSkill.cs" />
+        <Compile Include="Fungus\JCommand\JPopTip.cs" />
+        <Compile Include="Fungus\JCommand\JShowCg.cs" />
+        <Compile Include="Manager\CanvasManager.cs" />
+        <Compile Include="Model\MapEvent.cs" />
+        <Compile Include="Exception\ArchiveException\ArchiveException.cs" />
+        <Compile Include="Exception\ArchiveException\ArchiveFileNotExistException.cs" />
+        <Compile Include="Factory\AuctionFactory.cs" />
+        <Compile Include="Factory\AvatarFactory.cs" />
+        <Compile Include="Factory\BackpackFactory.cs" />
+        <Compile Include="Factory\BuffFactory.cs" />
+        <Compile Include="Factory\BuffSeidFactory.cs" />
+        <Compile Include="Factory\ElixirFormulaFactory.cs" />
+        <Compile Include="Factory\ElixirFormulaItemFactory.cs" />
+        <Compile Include="Factory\ElixirItemFactory.cs" />
+        <Compile Include="Factory\IllustratedFactory.cs" />
+        <Compile Include="Factory\ItemJsonFactory.cs" />
+        <Compile Include="Factory\MapOptionFactory.cs" />
+        <Compile Include="Factory\NpcFactory.cs" />
+        <Compile Include="Factory\SeidJsonFactory.cs" />
+        <Compile Include="Factory\SkillFactory.cs" />
+        <Compile Include="Factory\SkillItemFactory.cs" />
+        <Compile Include="Factory\SkillSeidFactory.cs" />
+        <Compile Include="Factory\SpecialGoodsFactory.cs" />
+        <Compile Include="Factory\StaticSkillFactory.cs" />
+        <Compile Include="Factory\StaticSkillItemFactory.cs" />
+        <Compile Include="Factory\TaskFactory.cs" />
+        <Compile Include="Fungus\JCommand\JAddItem.cs" />
+        <Compile Include="Fungus\JCommand\JAddItemToNpc.cs" />
+        <Compile Include="Fungus\JCommand\JAddLingGuang.cs" />
+        <Compile Include="Fungus\JCommand\JAddTask.cs" />
+        <Compile Include="Fungus\JCommand\JCall.cs" />
+        <Compile Include="Fungus\JCommand\JCloseTab.cs" />
+        <Compile Include="Fungus\JCommand\JIf.cs" />
+        <Compile Include="Fungus\JCommand\JMenu.cs" />
+        <Compile Include="Fungus\JCommand\JNextTask.cs" />
+        <Compile Include="Fungus\JCommand\JOr.cs" />
+        <Compile Include="Fungus\JCommand\JPlayMusic.cs" />
+        <Compile Include="Fungus\JCommand\JPlayEffect.cs" />
+        <Compile Include="Fungus\JCommand\JRun.cs" />
+        <Compile Include="Fungus\JCommand\JSay.cs" />
+        <Compile Include="Fungus\JBlock.cs" />
+        <Compile Include="Fungus\JCommand\JWait.cs" />
+        <Compile Include="Fungus\JFlowchart.cs" />
+        <Compile Include="Fungus\PatchOperate.cs" />
+        <Compile Include="JToolsCoreMain.cs" />
+        <Compile Include="Manager\AssetBundleManager.cs" />
+        <Compile Include="Manager\FungusManager.cs" />
+        <Compile Include="Manager\MapEventManager.cs" />
+        <Compile Include="Model\MapEventData.cs" />
+        <Compile Include="Patch\BlockPatch.cs" />
+        <Compile Include="Patch\BuffSeidPatch.cs" />
+        <Compile Include="Patch\FlowchartPatch.cs" />
+        <Compile Include="Patch\MapEventPatch.cs" />
+        <Compile Include="Patch\SayDialogPatch.cs" />
+        <Compile Include="Properties\AssemblyInfo.cs" />
+        <Compile Include="Tool\FungusTools.cs" />
+        <Compile Include="Util\ArchiveUtil.cs" />
+        <Compile Include="Util\AvatarUtil.cs" />
+        <Compile Include="Util\DllUtil.cs" />
+        <Compile Include="Util\FightUtil.cs" />
+        <Compile Include="Util\FungusUtil.cs" />
+        <Compile Include="Util\HarmonyUtil.cs" />
+        <Compile Include="Util\JsonDataUtil.cs" />
+        <Compile Include="Util\JsonObjectUtil.cs" />
+        <Compile Include="Util\LogUtil.cs" />
+        <Compile Include="Util\ModUtil.cs" />
+        <Compile Include="Util\RefreshDataUtil.cs" />
+        <Compile Include="Util\TaskUtil.cs" />
+        <Compile Include="Util\UnityUtil.cs" />
+    </ItemGroup>
+
+    <!--  项目依赖引用配置  -->
+    <ItemGroup>
+        <Reference Include="../../Library/**">
+            <Private>False</Private>
+        </Reference>
+        <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" PrivateAssets="All" Version="1.0.0-preview.2" />
+    </ItemGroup>
+
+    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
