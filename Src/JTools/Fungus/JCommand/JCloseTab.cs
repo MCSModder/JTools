@@ -12,6 +12,10 @@ namespace TierneyJohn.MiChangSheng.JTools.Fungus.JCommand
     {
         #region 构造方法
 
+        /// <summary>
+        /// 关闭 Tab 界面指令
+        /// </summary>
+        /// <returns>JCloseTab 对象</returns>
         public JCloseTab Create()
         {
             return this;

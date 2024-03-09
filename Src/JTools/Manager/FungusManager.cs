@@ -16,9 +16,13 @@ namespace TierneyJohn.MiChangSheng.JTools.Manager
 
         public static FungusManager Inst;
 
-        private readonly Dictionary<string, JFlowchart> _flowcharts = new Dictionary<string, JFlowchart>();
+        private readonly Dictionary<string, JFlowchart> _flowcharts = new();
+        private readonly List<PatchOperate> _patchOperates = [];
 
-        private readonly List<PatchOperate> _patchOperates = new List<PatchOperate>();
+        private string _cacheInnerFightFlowchartName;
+        private string _cacheInnerFightBlockName;
+        private string _cacheAfterFightFlowchartName;
+        private string _cacheAfterFightBlockName;
 
         #endregion
 
@@ -144,6 +148,61 @@ namespace TierneyJohn.MiChangSheng.JTools.Manager
             return patchOperate;
         }
 
+        /// <summary>
+        /// 注册战斗时缓存剧情数据
+        /// </summary>
+        /// <param name="flowchartName">剧情 Flowchart 名称</param>
+        /// <param name="blockName">剧情 Block 名称</param>
+        public void RegisterInnerFightData(string flowchartName, string blockName)
+        {
+            _cacheInnerFightFlowchartName = flowchartName;
+            _cacheInnerFightBlockName = blockName;
+        }
+
+        /// <summary>
+        /// 注册战斗后缓存剧情数据
+        /// </summary>
+        /// <param name="flowchartName">剧情 Flowchart 名称</param>
+        /// <param name="blockName">剧情 Block 名称</param>
+        public void RegisterAfterFightData(string flowchartName, string blockName)
+        {
+            _cacheAfterFightFlowchartName = flowchartName;
+            _cacheAfterFightBlockName = blockName;
+        }
+
+        #endregion
+
+        #region Fungus 剧情数据获取方法
+
+        /// <summary>
+        /// 存在指定名称的 Flowchart 数据
+        /// </summary>
+        /// <param name="flowchartName">Flowchart 名称</param>
+        /// <returns>验证结果</returns>
+        public bool HasFlowchart(string flowchartName)
+        {
+            return _flowcharts.ContainsKey(flowchartName);
+        }
+
+        /// <summary>
+        /// 获取所有 JFlowchart 剧情名称
+        /// </summary>
+        /// <returns>剧情名称集合</returns>
+        public List<string> GetAllFlowchartName()
+        {
+            return _flowcharts.Keys.ToList();
+        }
+
+        /// <summary>
+        /// 获取所有剧情补丁数据
+        /// </summary>
+        /// <returns>剧情补丁数据集</returns>
+        public List<PatchOperate> GetAllOperates()
+        {
+            CheckOperates();
+            return _patchOperates;
+        }
+
         #endregion
 
         #region Fungus 剧情调用核心方法
@@ -167,36 +226,46 @@ namespace TierneyJohn.MiChangSheng.JTools.Manager
         }
 
         /// <summary>
-        /// 清空当前缓存剧情方法
+        /// 执行战斗时缓存剧情方法
         /// </summary>
-        public void Clear()
+        public void ExecuteInnerFightCache()
         {
-            foreach (var flowchart in _flowcharts.Values)
-            {
-                flowchart.transform.DestoryAllChild();
-                Destroy(flowchart.gameObject);
-            }
+            if (string.IsNullOrEmpty(_cacheInnerFightFlowchartName)) return;
+            if (string.IsNullOrEmpty(_cacheInnerFightBlockName)) return;
 
-            _flowcharts.Clear();
-            _patchOperates.Clear();
+            Execute(_cacheInnerFightFlowchartName, _cacheInnerFightBlockName);
+            _cacheInnerFightFlowchartName = null;
+            _cacheInnerFightBlockName = null;
+        }
+
+        /// <summary>
+        /// 执行战斗后缓存剧情方法
+        /// </summary>
+        public void ExecuteAfterFightCache()
+        {
+            Execute(_cacheAfterFightFlowchartName, _cacheAfterFightBlockName);
         }
 
         #endregion
 
         #region 常规公开方法
 
-        public List<PatchOperate> GetAllOperates()
-        {
-            CheckOperates();
-            return _patchOperates;
-        }
-
+        /// <summary>
+        /// 重载 Flowchart 数据方法
+        /// </summary>
+        /// <param name="flowchartName">剧情 Flowchart 名称</param>
+        /// <param name="flowchart">JFlowchart 对象</param>
         public void TryReloadFlowchart(string flowchartName, JFlowchart flowchart)
         {
             RemoveFlowchart(flowchartName);
             RegisterFlowchart(flowchartName, flowchart);
         }
 
+        /// <summary>
+        /// 获取指定 Flowchart 数据方法
+        /// </summary>
+        /// <param name="flowchartName">剧情 Flowchart 名称</param>
+        /// <param name="flowchart">JFlowchart 对象</param>
         public void TryGetFlowchart(string flowchartName, out JFlowchart flowchart)
         {
             flowchart = GetFlowchart(flowchartName);
@@ -207,6 +276,11 @@ namespace TierneyJohn.MiChangSheng.JTools.Manager
             }
         }
 
+        /// <summary>
+        /// 获取指定 Flowchart 数据方法
+        /// </summary>
+        /// <param name="flowchartName">剧情 Flowchart 名称</param>
+        /// <returns></returns>
         public JFlowchart GetFlowchart(string flowchartName)
         {
             CheckFlowcharts();
@@ -214,6 +288,10 @@ namespace TierneyJohn.MiChangSheng.JTools.Manager
             return flowchart;
         }
 
+        /// <summary>
+        /// 移除指定 Flowchart 数据方法
+        /// </summary>
+        /// <param name="flowchartName">剧情 Flowchart 名称</param>
         public void RemoveFlowchart(string flowchartName)
         {
             if (!_flowcharts.ContainsKey(flowchartName))
@@ -231,10 +309,28 @@ namespace TierneyJohn.MiChangSheng.JTools.Manager
             _flowcharts.Remove(flowchartName);
         }
 
+        /// <summary>
+        /// 清空当前缓存剧情方法
+        /// </summary>
+        public void Clear()
+        {
+            foreach (var flowchart in _flowcharts.Values)
+            {
+                flowchart.transform.DestoryAllChild();
+                Destroy(flowchart.gameObject);
+            }
+
+            _flowcharts.Clear();
+            _patchOperates.Clear();
+        }
+
         #endregion
 
         #region 私有方法
 
+        /// <summary>
+        /// 验证当前剧情补丁数据集
+        /// </summary>
         private void CheckOperates()
         {
             var operatesToRemoves = _patchOperates.Where(operate => operate.isExecute).ToList();
@@ -246,7 +342,7 @@ namespace TierneyJohn.MiChangSheng.JTools.Manager
         }
 
         /// <summary>
-        /// 验证当前缓存的 Flowchart 数据
+        /// 验证当前缓存的 Flowchart 数据集
         /// </summary>
         private void CheckFlowcharts()
         {

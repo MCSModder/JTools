@@ -17,7 +17,7 @@ namespace TierneyJohn.MiChangSheng.JTools
         /// <summary>
         /// JTools 插件版本信息
         /// </summary>
-        public const string ModVersion = "2.0.0";
+        public const string ModVersion = "2.1.6";
 
         /// <summary>
         /// JTools Log 日志打印方法封装
@@ -89,7 +89,7 @@ namespace TierneyJohn.MiChangSheng.JTools
 
         private void InitKeyCodeConfig()
         {
-            _useInfoLog = Config.Bind("模式开关", "是否打印常规信息", true, "开启后，会在控制台Info级别的日志信息；关闭后，将隐藏Info级别的日志信息");
+            _useInfoLog = Config.Bind("模式开关", "是否打印常规信息", false, "开启后，会在控制台Info级别的日志信息；关闭后，将隐藏Info级别的日志信息");
             _useWarnLog = Config.Bind("模式开关", "是否打印警告信息", true, "开启后，会在控制台Warn级别的日志信息；关闭后，将隐藏Warn级别的日志信息");
             _useErrorLog = Config.Bind("模式开关", "是否打印异常信息", true, "开启后，会在控制台Error级别的日志信息；关闭后，将隐藏Error级别的日志信息");
             _useSeidExtension = Config.Bind("功能开关", "是否启用Seid扩展", true, "开启后，将获得额外的Seid特性支持；关闭后，提供的额外Seid支持将会失效");
@@ -103,7 +103,8 @@ namespace TierneyJohn.MiChangSheng.JTools
                 typeof(AssetBundleManager),
                 typeof(CanvasManager),
                 typeof(FungusManager),
-                typeof(MapEventManager));
+                typeof(MapEventManager),
+                typeof(TimeFlagManager));
             DontDestroyOnLoad(_jTools);
         }
 

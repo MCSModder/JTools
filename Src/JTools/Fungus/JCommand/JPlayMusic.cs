@@ -26,7 +26,7 @@ namespace TierneyJohn.MiChangSheng.JTools.Fungus.JCommand
         /// <param name="actionTime">起始播放时间</param>
         /// <param name="playLoop">是否循环播放</param>
         /// <returns>JPlayMusic 对象</returns>
-        public JPlayMusic Create(AudioClip music, float actionTime = 0f, bool playLoop = true)
+        public JPlayMusic Create(AudioClip music, float actionTime = 0f, bool playLoop = false)
         {
             musicClip = music;
             atTime = actionTime;

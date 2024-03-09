@@ -22,8 +22,8 @@ namespace TierneyJohn.MiChangSheng.JTools.Manager
 
         #region 私有字段/属性
 
-        private readonly Dictionary<string, AssetBundle> _loadAssetBundles = new Dictionary<string, AssetBundle>();
-        private readonly Dictionary<string, string> _sceneNames = new Dictionary<string, string>();
+        private readonly Dictionary<string, AssetBundle> _loadAssetBundles = new();
+        private readonly Dictionary<string, string> _sceneNames = new();
         private string _assetBundlePath;
 
         #endregion

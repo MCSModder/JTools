@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Fungus;
 using UnityEngine;
 using FungusManager = TierneyJohn.MiChangSheng.JTools.Manager.FungusManager;
@@ -54,6 +55,16 @@ namespace TierneyJohn.MiChangSheng.JTools.Util
         {
             return flowchart.GetComponents<Block>().FirstOrDefault(item =>
                 item.BlockName.Equals(blockName) || (int.TryParse(blockName, out var value) && item.ItemId == value));
+        }
+
+        /// <summary>
+        /// 获取 Flowchart 对象内所有 Block 对象名称
+        /// </summary>
+        /// <param name="flowchart">Flowchart 对象</param>
+        /// <returns>Block 对象名称集</returns>
+        public static List<string> GetFlowchartBlockNames(this Flowchart flowchart)
+        {
+            return flowchart.GetComponents<Block>().Select(block => block.BlockName).ToList();
         }
     }
 }

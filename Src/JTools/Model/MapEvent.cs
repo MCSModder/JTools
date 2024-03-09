@@ -36,6 +36,16 @@ namespace TierneyJohn.MiChangSheng.JTools.Model
         public bool once;
 
         /// <summary>
+        /// 事件刷新情况
+        /// </summary>
+        public bool refreshFlag;
+
+        /// <summary>
+        /// 事件刷新时间
+        /// </summary>
+        public string resetTime;
+
+        /// <summary>
         /// 事件执行结果
         /// 只用于是否重复触发，与事件内部的逻辑无关
         /// </summary>
@@ -55,23 +65,15 @@ namespace TierneyJohn.MiChangSheng.JTools.Model
 
         #region 构造函数
 
-        public MapEvent(int eventId, int eventType, EvaluateDelegate evaluate, int nodeIndex = 0, bool once = true,
-            bool result = false)
+        public MapEvent(int eventId, int eventType, EvaluateDelegate evaluate, string resetTime = "", int nodeIndex = 0,
+            bool once = true, bool refreshFlag = false, bool result = false)
         {
             this.eventId = eventId;
             this.eventType = eventType;
             this.nodeIndex = nodeIndex;
+            this.resetTime = resetTime;
             this.once = once;
-            this.result = result;
-            Evaluate = evaluate;
-        }
-
-        public MapEvent(int eventId, int eventType, int nodeIndex, bool once, bool result, EvaluateDelegate evaluate)
-        {
-            this.eventId = eventId;
-            this.eventType = eventType;
-            this.nodeIndex = nodeIndex;
-            this.once = once;
+            this.refreshFlag = refreshFlag;
             this.result = result;
             Evaluate = evaluate;
         }

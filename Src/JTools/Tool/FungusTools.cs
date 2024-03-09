@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Fungus;
 using TierneyJohn.MiChangSheng.JTools.Fungus;
 using TierneyJohn.MiChangSheng.JTools.Fungus.JCommand;
@@ -11,6 +12,18 @@ namespace TierneyJohn.MiChangSheng.JTools.Tool
     /// </summary>
     public static class FungusTools
     {
+        /// <summary>
+        /// 添加生平记录指令
+        /// </summary>
+        /// <param name="block">JBlock 对象</param>
+        /// <param name="id">生平记录名称</param>
+        /// <param name="args">生平记录文本替换列表</param>
+        public static JBlock AddBiography(this JBlock block, string id, Dictionary<string, string> args = null)
+        {
+            block.CreateCommand<JAddBiography>().Create(id, args);
+            return block;
+        }
+
         /// <summary>
         /// 添加或移除指定物品指令
         /// </summary>
@@ -49,6 +62,18 @@ namespace TierneyJohn.MiChangSheng.JTools.Tool
         }
 
         /// <summary>
+        /// 添加灵石
+        /// </summary>
+        /// <param name="block">JBlock 对象</param>
+        /// <param name="money">灵石数量</param>
+        /// <param name="message">自定义提示文本</param>
+        public static JBlock AddMoney(this JBlock block, int money, string message = "")
+        {
+            block.CreateCommand<JAddMoney>().Create(money, message);
+            return block;
+        }
+
+        /// <summary>
         /// 添加新任务
         /// </summary>
         /// <param name="block">JBlock 对象</param>
@@ -71,6 +96,30 @@ namespace TierneyJohn.MiChangSheng.JTools.Tool
         public static JBlock AddTime(this JBlock block, int year, int month, int day, bool billingFlag = false)
         {
             block.CreateCommand<JAddTime>().Create(year, month, day, billingFlag);
+            return block;
+        }
+
+        /// <summary>
+        /// 战斗结束剧情调用指令
+        /// </summary>
+        /// <param name="block">JBlock 对象</param>
+        /// <param name="callBlockName">待执行 Block 名称</param>
+        /// <param name="callFlowchartName">待执行 Flowchart 名称</param>
+        public static JBlock AfterFight(this JBlock block, string callBlockName, string callFlowchartName = "")
+        {
+            block.CreateCommand<JAfterFight>().Create(callBlockName, callFlowchartName);
+            return block;
+        }
+
+        /// <summary>
+        /// 战斗结束剧情调用指令
+        /// </summary>
+        /// <param name="block">JBlock 对象</param>
+        /// <param name="callBlock">待执行 Block 数据</param>
+        /// <param name="callFlowchart">待执行 Flowchart 数据</param>
+        public static JBlock AfterFight(this JBlock block, Block callBlock, Flowchart callFlowchart = null)
+        {
+            block.CreateCommand<JAfterFight>().Create(callBlock, callFlowchart);
             return block;
         }
 
@@ -111,6 +160,19 @@ namespace TierneyJohn.MiChangSheng.JTools.Tool
         }
 
         /// <summary>
+        /// 淡入淡出指令
+        /// </summary>
+        /// <param name="block">JBlock 对象</param>
+        /// <param name="hide">淡入或淡出操作</param>
+        /// <param name="texture2D">加载图片</param>
+        /// <param name="isWait">是否等待动画执行完</param>
+        public static JBlock FadeScreen(this JBlock block, bool hide, Texture2D texture2D = null, bool isWait = true)
+        {
+            block.CreateCommand<JFadeScreen>().Create(hide, texture2D, isWait);
+            return block;
+        }
+
+        /// <summary>
         /// 隐藏 CG 显示
         /// </summary>
         /// <param name="block">JBlock 对象</param>
@@ -129,6 +191,30 @@ namespace TierneyJohn.MiChangSheng.JTools.Tool
         public static JBlock If(this JBlock block, JBlock targetBlock, JIf.EvaluateDelegate evaluate)
         {
             block.CreateCommand<JIf>().Create(targetBlock, evaluate);
+            return block;
+        }
+
+        /// <summary>
+        /// 战斗时剧情调用指令
+        /// </summary>
+        /// <param name="block">JBlock 对象</param>
+        /// <param name="callBlockName">待执行 Block 名称</param>
+        /// <param name="callFlowchartName">待执行 Flowchart 名称</param>
+        public static JBlock InnerFight(this JBlock block, string callBlockName, string callFlowchartName = "")
+        {
+            block.CreateCommand<JInnerFight>().Create(callBlockName, callFlowchartName);
+            return block;
+        }
+
+        /// <summary>
+        /// 战斗时剧情调用指令
+        /// </summary>
+        /// <param name="block">JBlock 对象</param>
+        /// <param name="callBlock">待执行 Block 数据</param>
+        /// <param name="callFlowchart">待执行 Flowchart 数据</param>
+        public static JBlock InnerFight(this JBlock block, Block callBlock, Flowchart callFlowchart = null)
+        {
+            block.CreateCommand<JInnerFight>().Create(callBlock, callFlowchart);
             return block;
         }
 
@@ -240,7 +326,7 @@ namespace TierneyJohn.MiChangSheng.JTools.Tool
         /// <param name="music">音乐对象</param>
         /// <param name="actionTime">起始播放时间</param>
         /// <param name="playLoop">是否循环播放</param>
-        public static JBlock PlayMusic(this JBlock block, AudioClip music, float actionTime = 0f, bool playLoop = true)
+        public static JBlock PlayMusic(this JBlock block, AudioClip music, float actionTime = 0f, bool playLoop = false)
         {
             block.CreateCommand<JPlayMusic>().Create(music, actionTime, playLoop);
             return block;
@@ -336,6 +422,16 @@ namespace TierneyJohn.MiChangSheng.JTools.Tool
         }
 
         /// <summary>
+        /// 摇晃摄影机指令
+        /// </summary>
+        /// <param name="block">JBlock 对象</param>
+        public static JBlock ShakeCamera(this JBlock block)
+        {
+            block.CreateCommand<JShakeCamera>().Create();
+            return block;
+        }
+
+        /// <summary>
         /// 显示 CG 指令
         /// </summary>
         /// <param name="block">JBlock 对象</param>
@@ -354,6 +450,37 @@ namespace TierneyJohn.MiChangSheng.JTools.Tool
         public static JBlock ShowCg(this JBlock block, Sprite sprite)
         {
             block.CreateCommand<JShowCg>().Create(sprite);
+            return block;
+        }
+
+        /// <summary>
+        /// 开始战斗指令
+        /// </summary>
+        /// <param name="block">JBlock 对象</param>
+        /// <param name="monsterId">战斗对象编号</param>
+        /// <param name="fightType">战斗类型</param>
+        /// <param name="canRun">是否可以逃跑</param>
+        /// <param name="backgroundId">背景图编号</param>
+        /// <param name="music">播放音乐名称</param>
+        /// <param name="isSea">是否为海上NPC(战斗后会移除)</param>
+        /// <param name="playerBuffs">战斗时主角额外buff</param>
+        /// <param name="monsterBuffs">战斗时对象额外buff</param>
+        public static JBlock StartFight(this JBlock block, int monsterId, StartFight.FightEnumType fightType,
+            bool canRun = true, int backgroundId = 0, string music = "战斗1", bool isSea = false,
+            List<StarttFightAddBuff> playerBuffs = null, List<StarttFightAddBuff> monsterBuffs = null)
+        {
+            block.CreateCommand<JStartFight>().Create(monsterId, fightType, canRun, backgroundId, music, isSea,
+                playerBuffs, monsterBuffs);
+            return block;
+        }
+
+        /// <summary>
+        /// 停止播放音乐指令
+        /// </summary>
+        /// <param name="block">JBlock 对象</param>
+        public static JBlock StopMusic(this JBlock block)
+        {
+            block.CreateCommand<JStopMusic>().Create();
             return block;
         }
 

@@ -27,5 +27,23 @@ namespace TierneyJohn.MiChangSheng.JTools.Fungus.JCommand
         }
 
         #endregion
+
+        #region 公开方法
+
+        public override void OnEnter()
+        {
+            if (ItemNum > 0)
+            {
+                PlayerEx.Player.addItem(ItemID, ItemNum, Tools.CreateItemSeid(ItemID), showText);
+            }
+            else
+            {
+                PlayerEx.Player.removeItem(ItemID, Math.Abs(ItemNum));
+            }
+
+            Continue();
+        }
+
+        #endregion
     }
 }

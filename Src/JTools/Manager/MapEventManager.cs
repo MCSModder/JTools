@@ -18,8 +18,8 @@ namespace TierneyJohn.MiChangSheng.JTools.Manager
 
         private JSONObject AllMapRandomNode => PlayerEx.Player.AllMapRandomNode;
 
-        private readonly Dictionary<int, MapEvent> _mapEvent = new Dictionary<int, MapEvent>();
-        private readonly Dictionary<int, MapEventData> _mapEventData = new Dictionary<int, MapEventData>();
+        private readonly Dictionary<int, MapEvent> _mapEvent = new();
+        private readonly Dictionary<int, MapEventData> _mapEventData = new();
 
         #endregion
 
@@ -48,16 +48,38 @@ namespace TierneyJohn.MiChangSheng.JTools.Manager
         /// </summary>
         public void RefreshMapEventData()
         {
-            foreach (var mapEventData in _mapEvent.Values)
+            // 验证事件激活条件
+            foreach (var mapEvent in _mapEvent.Values.Where(mapEvent =>
+                         !mapEvent.refreshFlag && mapEvent.Evaluate.Invoke()))
             {
-                if (mapEventData.Evaluate.Invoke())
+                if (mapEvent.once)
                 {
-                    if (mapEventData.once)
+                    mapEvent.refreshFlag = true;
+                    if (CheckMapEvent(mapEvent)) continue;
+                }
+
+                ActiveMapEvent(mapEvent);
+            }
+
+            // 验证事件过期条件
+            foreach (var mapEvent in _mapEvent.Values)
+            {
+                if (string.IsNullOrEmpty(mapEvent.resetTime)) continue;
+
+                if (PlayerEx.Player.worldTimeMag.getNowTime() >= DateTime.Parse(mapEvent.resetTime))
+                {
+                    var nodes = AllMapRandomNode.list.FindAll(item =>
+                        item.GetFieldInt(Type) == mapEvent.eventType && item.GetFieldInt(EventId) == mapEvent.eventId);
+
+                    foreach (var node in nodes)
                     {
-                        mapEventData.result = true;
+                        node.SetField(EventId, "0");
+                        node.SetField(Type, 2);
+                        node.SetField(Reset, false);
+                        node.SetField(ResetTime, "0001-1-1");
                     }
 
-                    ActiveMapEvent(mapEventData);
+                    mapEvent.result = true;
                 }
             }
 
@@ -76,20 +98,20 @@ namespace TierneyJohn.MiChangSheng.JTools.Manager
 
             if (AllMapRandomNode.HasField(nodeIndex.ToString()))
             {
-                eventJsonData = PlayerEx.Player.AllMapRandomNode.GetField(nodeIndex.ToString());
+                eventJsonData = AllMapRandomNode.GetField(nodeIndex.ToString());
             }
             else
             {
                 eventJsonData = AllMapRandomNode.list
                     .FindAll(item => item.GetFieldInt(Type) == 2)
-                    .OrderBy(f => Guid.NewGuid())
+                    .OrderBy(_ => Guid.NewGuid())
                     .FirstOrDefault() ?? JSONObject.Create();
             }
 
             eventJsonData.SetField(EventId, eventId);
             eventJsonData.SetField(Type, eventType);
-            eventJsonData.SetField(Reset, "false");
-            eventJsonData.SetField(ResetTime, "0001-01-01");
+            eventJsonData.SetField(Reset, false);
+            eventJsonData.SetField(ResetTime, "0001-1-1");
         }
 
         /// <summary>
@@ -105,10 +127,32 @@ namespace TierneyJohn.MiChangSheng.JTools.Manager
         /// <summary>
         /// 激活大地图节点事件配置
         /// </summary>
-        /// <param name="mapEvent">MapEventData 数据对象</param>
+        /// <param name="mapEvent">MapEvent 事件对象</param>
         public void ActiveMapEvent(MapEvent mapEvent)
         {
             ActiveMapEvent(mapEvent.nodeIndex, mapEvent.eventId, mapEvent.eventType);
+        }
+
+        /// <summary>
+        /// 验证当前大地图节点事件是否存在
+        /// </summary>
+        /// <param name="eventId">事件编号</param>
+        /// <param name="eventType">事件类型</param>
+        /// <returns>验证结果</returns>
+        public bool CheckMapEvent(int eventId, int eventType)
+        {
+            return AllMapRandomNode.list.FindAll(item =>
+                item.GetFieldInt(Type) == eventType && item.GetFieldInt(EventId) == eventId).Any();
+        }
+
+        /// <summary>
+        /// 验证当前大地图节点事件是否存在
+        /// </summary>
+        /// <param name="mapEvent">MapEvent 事件对象</param>
+        /// <returns>验证结果</returns>
+        public bool CheckMapEvent(MapEvent mapEvent)
+        {
+            return CheckMapEvent(mapEvent.eventId, mapEvent.eventType);
         }
 
         #endregion
