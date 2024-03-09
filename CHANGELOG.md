@@ -1,5 +1,80 @@
 # CHANGELOG
 
+## [2.1.6] - 2024-03-08
+
+### Features
+
+* [[BTC-T-190](https://mcs.jetbrains.space/p/btc/issues/190)] JT-v2.1.6-新增一系列自定义Seid数据
+* [[BTC-T-191](https://mcs.jetbrains.space/p/btc/issues/191)] JT-v2.1.6-新增一系列数据工厂方法
+* [[BTC-T-193](https://mcs.jetbrains.space/p/btc/issues/193)] JT-v2.1.6-版本更新
+
+### Fix
+
+* [[BTC-T-192](https://mcs.jetbrains.space/p/btc/issues/192)] JT-v2.1.6-修复JAddItem指令可能导致的物品无法正常移除问题
+
+## [2.1.5] - 2024-03-03
+
+### Features
+
+* [[BTC-T-166](https://mcs.jetbrains.space/p/btc/issues/166)] JT-v2.1.5-添加"生平记录"相关方法、指令
+* [[BTC-T-167](https://mcs.jetbrains.space/p/btc/issues/167)] JT-v2.1.5-新增装备物品数据工厂方法
+* [[BTC-T-168](https://mcs.jetbrains.space/p/btc/issues/168)] JT-v2.1.5-新增自定义Seid数据
+* [[BTC-T-178](https://mcs.jetbrains.space/p/btc/issues/178)] JT-v2.1.5-新增剧情指令
+* [[BTC-T-179](https://mcs.jetbrains.space/p/btc/issues/179)] JT-v2.1.5-版本更新
+
+## [2.1.4] - 2024-02-28
+
+### Features
+
+* [[BTC-T-163](https://mcs.jetbrains.space/p/btc/issues/163)] JT-v2.1.4-优化大地图随机事件管理器，提供自定义事件超时自动移除功能
+* [[BTC-T-164](https://mcs.jetbrains.space/p/btc/issues/164)] JT-v2.1.4-新增一系列剧情指令
+* [[BTC-T-165](https://mcs.jetbrains.space/p/btc/issues/165)] JT-v2.1.4-版本更新
+
+## [2.1.3] - 2024-02-28
+
+### Features
+
+* [[BTC-T-161](https://mcs.jetbrains.space/p/btc/issues/161)] JT-v2.1.3-优化PlayMusic指令，现在默认不再循环播放背景音乐
+* [[BTC-T-162](https://mcs.jetbrains.space/p/btc/issues/162)] JT-v2.1.3-版本更新
+
+### Fix
+
+* [[BTC-T-160](https://mcs.jetbrains.space/p/btc/issues/160)] JT-v2.1.3-修复自定义大地图事件完成后，面板有概率不自动关闭的问题
+
+## [2.1.2] - 2024-02-27
+
+### Features
+
+* [[BTC-T-143](https://mcs.jetbrains.space/p/btc/issues/143)] JT-v2.1.2-DotNet8语法优化
+* [[BTC-T-145](https://mcs.jetbrains.space/p/btc/issues/145)] JT-v2.1.2-新增一系列JCommand指令
+* [[BTC-T-146](https://mcs.jetbrains.space/p/btc/issues/146)] JT-v2.1.2-新增时间处理管理器
+* [[BTC-T-156](https://mcs.jetbrains.space/p/btc/issues/156)] JT-v2.1.2-版本更新
+
+### Fix
+
+* [[BTC-T-150](https://mcs.jetbrains.space/p/btc/issues/150)] JT-v2.1.2-修复大地图随机事件在某些情况下重复刷新问题
+
+## [2.1.1] - 2024-02-24
+
+### Features
+
+* [[BTC-T-125](https://mcs.jetbrains.space/p/btc/issues/125)] JT-v2.1-新增游戏内置编辑器
+* [[BTC-T-126](https://mcs.jetbrains.space/p/btc/issues/126)] JT-v2.1-变更默认配置信息
+* [[BTC-T-130](https://mcs.jetbrains.space/p/btc/issues/130)] JT-v2.1.1-优化剧情编辑器调用时点
+* [[BTC-T-131](https://mcs.jetbrains.space/p/btc/issues/131)] JT-v2.1.1-新增数据Clone方法
+* [[BTC-T-132](https://mcs.jetbrains.space/p/btc/issues/132)] JT-v2.1.1-调整游戏内置编辑器呼出快捷键
+* [[BTC-T-133](https://mcs.jetbrains.space/p/btc/issues/133)] JT-v2.1.1-新增FungusManager相关数据获取方法
+* [[BTC-T-134](https://mcs.jetbrains.space/p/btc/issues/134)] JT-v2.1.1-新增一系列工具方法
+* [[BTC-T-135](https://mcs.jetbrains.space/p/btc/issues/135)] JT-v2.1.1-新增Fungus数据获取方法
+* [[BTC-T-136](https://mcs.jetbrains.space/p/btc/issues/136)] JT-v2.1.1-新增Vector数据处理方法
+* [[BTC-T-137](https://mcs.jetbrains.space/p/btc/issues/137)] JT-v2.1.1-新增自定义Fungus剧情调用相关内容
+* [[BTC-T-138](https://mcs.jetbrains.space/p/btc/issues/138)] JT-v2.1.1-新增游戏内置编辑器呼出快捷键配置
+* [[BTC-T-139](https://mcs.jetbrains.space/p/btc/issues/139)] JT-v2.1.1-版本更新
+
+## [2.1.0] - 2024-02-13
+
+仅为临时版本，相关内容变动参考 v2.1.1
+
 ## [2.0.0] - 2024-02-06
 
 ### Features

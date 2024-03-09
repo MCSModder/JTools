@@ -49,10 +49,10 @@ namespace TierneyJohn.MiChangSheng.JTools.Patch
                 var nodeIndex = __instance.NodeIndex;
                 var nodeData = avatar.AllMapRandomNode.GetField(nodeIndex.ToString());
 
-                var taskID = avatar.nomelTaskMag.AutoAllMapPlaceHasNTask(new List<int> { nodeIndex });
+                var taskID = avatar.nomelTaskMag.AutoAllMapPlaceHasNTask([nodeIndex]);
                 if (taskID != -1)
                 {
-                    var jsonObject = avatar.nomelTaskMag.IsNTaskZiXiangInLuJin(taskID, new List<int> { nodeIndex });
+                    var jsonObject = avatar.nomelTaskMag.IsNTaskZiXiangInLuJin(taskID, [nodeIndex]);
                     var childIdSuiJiJson = avatar.nomelTaskMag.GetNowChildIDSuiJiJson(taskID);
                     if (jsonObject.GetFieldInt("type") == 5)
                     {
@@ -214,6 +214,7 @@ namespace TierneyJohn.MiChangSheng.JTools.Patch
                     mapEventData.Action.Invoke();
                     okBtn.SetActive(true);
                     optionList.gameObject.SetActive(false);
+                    QiYuUIMag.Inst.Close();
                 });
 
                 return;
@@ -253,10 +254,6 @@ namespace TierneyJohn.MiChangSheng.JTools.Patch
                     optionList.gameObject.SetActive(false);
                 });
             }
-
-            // if (optionsCount > 3)
-            // 原版事件对话框显示超过 3 个会造成显示问题，因此暂时舍弃后续选项
-            // 后续优化后再考虑恢复功能
         }
     }
 }

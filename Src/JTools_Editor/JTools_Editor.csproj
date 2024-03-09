@@ -1,16 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-    <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')"/>
+    <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props"
+            Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')"/>
 
     <!--  项目基本配置信息  -->
     <PropertyGroup>
         <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
         <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-        <ProjectGuid>{70C13368-4DC1-4C66-99FF-352531F1FDB0}</ProjectGuid>
+        <ProjectGuid>{65BA4B9E-149C-485A-81CB-5B620347BBF7}</ProjectGuid>
         <OutputType>Library</OutputType>
         <AppDesignerFolder>Properties</AppDesignerFolder>
-        <RootNamespace>TierneyJohn.MiChangSheng.JTools_Next</RootNamespace>
-        <AssemblyName>JTools_Next</AssemblyName>
+        <RootNamespace>TierneyJohn.MiChangSheng.JTools_Editor</RootNamespace>
+        <AssemblyName>JTools_Editor</AssemblyName>
         <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
         <LangVersion>default</LangVersion>
@@ -41,14 +42,16 @@
 
     <!--  项目文件配置  -->
     <ItemGroup>
-        <Compile Include="Data\ModSeidMetaData.cs"/>
-        <Compile Include="JToolsNextMain.cs"/>
-        <Compile Include="Patch\ModEditorPatch.cs"/>
+        <Compile Include="Event\PlotPanelEvent.cs"/>
+        <Compile Include="JToolsEditorMain.cs"/>
+        <Compile Include="Manager\EditorManager.cs"/>
         <Compile Include="Properties\AssemblyInfo.cs"/>
-        <Compile Include="Util\ModManagerUtil.cs"/>
-        <Compile Include="Util\NextAssetsUtil.cs"/>
-        <Compile Include="Util\NextDialogUtil.cs"/>
-        <Compile Include="Util\NextLogUtil.cs"/>
+        <Compile Include="UI\EditorUI.cs"/>
+        <Compile Include="UI\PlotPanel\BlockItemUI.cs"/>
+        <Compile Include="UI\PlotPanel\FlowchartItemUI.cs"/>
+        <Compile Include="UI\PlotPanel\PlotPanelUI.cs"/>
+        <Compile Include="UI\ResPanelUI.cs"/>
+        <Compile Include="UI\ToolPanelUI.cs"/>
     </ItemGroup>
 
     <!--  依赖配置  -->
@@ -60,10 +63,6 @@
         <ProjectReference Include="..\JTools\JTools.csproj">
             <Project>{42cb9b33-379f-4707-95eb-d6c34cafcf83}</Project>
             <Name>JTools</Name>
-        </ProjectReference>
-        <ProjectReference Include="..\JTools_Editor\JTools_Editor.csproj">
-            <Project>{65BA4B9E-149C-485A-81CB-5B620347BBF7}</Project>
-            <Name>JTools_Editor</Name>
         </ProjectReference>
     </ItemGroup>
 

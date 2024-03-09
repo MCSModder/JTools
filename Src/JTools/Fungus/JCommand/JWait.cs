@@ -21,7 +21,7 @@ namespace TierneyJohn.MiChangSheng.JTools.Fungus.JCommand
         }
 
         #endregion
-        
+
         #region 公开方法
 
         public override void OnEnter()
@@ -34,6 +34,11 @@ namespace TierneyJohn.MiChangSheng.JTools.Fungus.JCommand
             if (CommandIndex >= ParentBlock.commandList.Count - 1)
             {
                 StopParentBlock();
+            }
+
+            if (PanelMamager.inst.UIBlackMaskGameObject == null)
+            {
+                Instantiate(ResManager.inst.LoadPrefab("BlackHide"));
             }
 
             PanelMamager.inst.UIBlackMaskGameObject.SetActive(false);

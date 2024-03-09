@@ -165,5 +165,30 @@ namespace TierneyJohn.MiChangSheng.JTools.Util
                 YSFuncList.Ints.Continue();
             });
         }
+
+        /// <summary>
+        /// 获取战斗结果
+        /// </summary>
+        /// <returns>战斗结果返回值</returns>
+        public static FightResult GetFightResult()
+        {
+            var result = GlobalValue.GetTalk(1);
+            return result switch
+            {
+                1 => FightResult.Normal,
+                2 => FightResult.Success,
+                3 => FightResult.Fail,
+                4 => FightResult.Runaway,
+                _ => FightResult.Normal
+            };
+        }
+
+        public enum FightResult
+        {
+            Normal = 1,
+            Success = 2,
+            Fail = 3,
+            Runaway = 4
+        }
     }
 }

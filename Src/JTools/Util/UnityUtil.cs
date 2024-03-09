@@ -75,9 +75,14 @@ namespace TierneyJohn.MiChangSheng.JTools.Util
 
         #region Vector 相关
 
-        public static Vector3 ToNew(this Vector3 vector)
+        public static Vector3 ToNewX(this Vector3 vector, float x)
         {
-            return vector.ToNew(0, 0);
+            return vector.ToNew(x, 0);
+        }
+
+        public static Vector3 ToNewY(this Vector3 vector, float y)
+        {
+            return vector.ToNew(0, y);
         }
 
         public static Vector3 ToNew(this Vector3 vector, float x, float y)
@@ -88,6 +93,46 @@ namespace TierneyJohn.MiChangSheng.JTools.Util
         public static Vector3 ToNew(this Vector3 vector, float x, float y, float z)
         {
             return new Vector3(vector.x + x, vector.y + y, vector.z + z);
+        }
+
+        public static Vector3 ChangeX(this Vector3 vector, float x)
+        {
+            return new Vector3(x, vector.y, vector.z);
+        }
+
+        public static Vector3 ChangeY(this Vector3 vector, float y)
+        {
+            return new Vector3(vector.x, y, vector.z);
+        }
+
+        public static Vector3 ChangeZ(this Vector3 vector, float z)
+        {
+            return new Vector3(vector.x, vector.y, z);
+        }
+
+        public static Vector2 ToNewX(this Vector2 vector, float x)
+        {
+            return vector.ToNew(x, 0);
+        }
+
+        public static Vector2 ToNewY(this Vector2 vector, float y)
+        {
+            return vector.ToNew(0, y);
+        }
+
+        public static Vector2 ToNew(this Vector2 vector, float x, float y)
+        {
+            return new Vector2(vector.x + x, vector.y + y);
+        }
+
+        public static Vector2 ChangeX(this Vector2 vector, float x)
+        {
+            return new Vector2(x, vector.y);
+        }
+
+        public static Vector2 ChangeY(this Vector2 vector, float y)
+        {
+            return new Vector2(vector.x, y);
         }
 
         #endregion

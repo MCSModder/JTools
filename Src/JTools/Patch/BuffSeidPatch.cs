@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using HarmonyLib;
 using KBEngine;
 using TierneyJohn.MiChangSheng.JTools.Util;
@@ -13,6 +14,7 @@ namespace TierneyJohn.MiChangSheng.JTools.Patch
         [HarmonyPrefix, HarmonyPatch(nameof(Buff.CanRealizeSeid))]
         public static bool PrefixCanRealizeSeid(
             Avatar _avatar,
+            List<int> flag,
             int nowSeid,
             Buff __instance,
             ref bool __result)
@@ -33,6 +35,26 @@ namespace TierneyJohn.MiChangSheng.JTools.Patch
                     __result = CanRealizeSeid328(nowSeid, _avatar, __instance);
                     $"自定义 BuffSeid328 判定结果: {__result}".Log();
                     return false;
+                case 329:
+                    __result = CanRealizeSeid329(nowSeid, flag, _avatar, __instance);
+                    $"自定义 BuffSeid329 判定结果: {__result}".Log();
+                    return false;
+                case 330:
+                    __result = CanRealizeSeid330(nowSeid, flag, _avatar, __instance);
+                    $"自定义 BuffSeid330 判定结果: {__result}".Log();
+                    return false;
+                case 331:
+                    __result = CanRealizeSeid331(nowSeid, flag, _avatar, __instance);
+                    $"自定义 BuffSeid331 判定结果: {__result}".Log();
+                    return false;
+                case 332:
+                    __result = CanRealizeSeid332(nowSeid, flag, _avatar, __instance);
+                    $"自定义 BuffSeid332 判定结果: {__result}".Log();
+                    return false;
+                case 334:
+                    __result = CanRealizeSeid334(nowSeid, flag, _avatar, __instance);
+                    $"自定义 BuffSeid334 判定结果: {__result}".Log();
+                    return false;
                 default:
                     return true;
             }
@@ -42,6 +64,7 @@ namespace TierneyJohn.MiChangSheng.JTools.Patch
         public static bool PrefixLoopRealizeSeid(
             int seid,
             Entity _avatar,
+            List<int> flag,
             Buff __instance)
         {
             if (!UseSeidExtension) return true;
@@ -82,6 +105,12 @@ namespace TierneyJohn.MiChangSheng.JTools.Patch
                     return false;
                 case 326:
                     ListRealizeSeid326(seid, avatar, __instance);
+                    return false;
+                case 333:
+                    ListRealizeSeid333(seid, avatar, __instance);
+                    return false;
+                case 335:
+                    ListRealizeSeid335(seid, avatar, flag, __instance);
                     return false;
                 default:
                     return true;
@@ -199,6 +228,115 @@ namespace TierneyJohn.MiChangSheng.JTools.Patch
             }
 
             return avatarLevel == otherLevel;
+        }
+
+        /// <summary>
+        /// 自定义 Buff Seid 329 若该次伤害超过 X% 血量，则触发后续特性
+        /// </summary>
+        /// <param name="seid">329</param>
+        /// <param name="flag">伤害数据</param>
+        /// <param name="avatar">待修改角色</param>
+        /// <param name="instance">Buff 对象实例</param>
+        /// <returns>判定结果</returns>
+        private static bool CanRealizeSeid329(int seid, IReadOnlyList<int> flag, Avatar avatar, Buff instance)
+        {
+            seid.RealizeSeidInfo(null, "Buff");
+
+            var injure = flag[0];
+            var percentage = instance.getSeidJson(seid).GetFieldInt("value1");
+            var hp = avatar.HP_Max * percentage / 100;
+
+            return injure >= hp;
+        }
+
+        /// <summary>
+        /// 自定义 Buff Seid 330 若该次伤害未超过 X% 血量，则触发后续特性
+        /// </summary>
+        /// <param name="seid">330</param>
+        /// <param name="flag">伤害数据</param>
+        /// <param name="avatar">待修改角色</param>
+        /// <param name="instance">Buff 对象实例</param>
+        /// <returns>判定结果</returns>
+        private static bool CanRealizeSeid330(int seid, IReadOnlyList<int> flag, Avatar avatar, Buff instance)
+        {
+            seid.RealizeSeidInfo(null, "Buff");
+
+            var injure = flag[0];
+            var percentage = instance.getSeidJson(seid).GetFieldInt("value1");
+            var hp = avatar.HP_Max * percentage / 100;
+
+            return injure < hp;
+        }
+
+        /// <summary>
+        /// 自定义 Buff Seid 331 若该次伤害导致血量低于 X%，则触发后续特性
+        /// </summary>
+        /// <param name="seid">331</param>
+        /// <param name="flag">伤害数据</param>
+        /// <param name="avatar">待修改角色</param>
+        /// <param name="instance">Buff 对象实例</param>
+        /// <returns>判定结果</returns>
+        private static bool CanRealizeSeid331(int seid, IReadOnlyList<int> flag, Avatar avatar, Buff instance)
+        {
+            seid.RealizeSeidInfo(null, "Buff");
+
+            var injure = flag[0];
+            var percentage = instance.getSeidJson(seid).GetFieldInt("value1");
+            var hp = avatar.HP_Max * percentage / 100;
+
+            if (avatar.HP < hp) return false;
+            return avatar.HP - injure < hp;
+        }
+
+        /// <summary>
+        /// 自定义 Buff Seid 332 若该次伤害导致血量未低于 X%，则触发后续特性
+        /// </summary>
+        /// <param name="seid">332</param>
+        /// <param name="flag">伤害数据</param>
+        /// <param name="avatar">待修改角色</param>
+        /// <param name="instance">Buff 对象实例</param>
+        /// <returns>判定结果</returns>
+        private static bool CanRealizeSeid332(int seid, IReadOnlyList<int> flag, Avatar avatar, Buff instance)
+        {
+            seid.RealizeSeidInfo(null, "Buff");
+
+            var injure = flag[0];
+            var percentage = instance.getSeidJson(seid).GetFieldInt("value1");
+            var hp = avatar.HP_Max * percentage / 100;
+
+            if (avatar.HP < hp) return false;
+            return avatar.HP - injure >= hp;
+        }
+
+        /// <summary>
+        /// 自定义 Buff Seid 334 若该次伤害导致血量低于 [X%,Y%,Z%]，则触发后续特性
+        /// </summary>
+        /// <param name="seid">334</param>
+        /// <param name="flag">伤害数据</param>
+        /// <param name="avatar">待修改角色</param>
+        /// <param name="instance">Buff 对象实例</param>
+        /// <returns>判定结果</returns>
+        private static bool CanRealizeSeid334(int seid, IReadOnlyList<int> flag, Avatar avatar, Buff instance)
+        {
+            seid.RealizeSeidInfo(null, "Buff");
+
+            var injure = flag[0];
+            var percentages = instance.getSeidJson(seid).GetFieldList("value1");
+
+            if (percentages.Count == 0)
+            {
+                seid.RealizeSeidWarn("value1 列表数据为空");
+                return false;
+            }
+
+            foreach (var percentage in percentages)
+            {
+                var hp = avatar.HP_Max * percentage / 100;
+
+                if (avatar.HP >= hp && avatar.HP - injure < hp) return true;
+            }
+
+            return false;
         }
 
         /// <summary>
@@ -550,6 +688,76 @@ namespace TierneyJohn.MiChangSheng.JTools.Patch
             foreach (var skillId in skillList)
             {
                 avatar.FightUseSkill(skillId, instance);
+            }
+        }
+
+        /// <summary>
+        /// 自定义 Buff Seid 333 角色添加 X% 血量
+        /// </summary>
+        /// <param name="seid">333</param>
+        /// <param name="avatar">释放角色</param>
+        /// <param name="instance">Buff 对象实例</param>
+        private static void ListRealizeSeid333(int seid, Avatar avatar, Buff instance)
+        {
+            seid.RealizeSeidInfo(null, "Buff");
+
+            var percentage = instance.getSeidJson(seid).GetFieldInt("value1");
+
+            var hp = avatar.HP_Max * percentage / 100;
+
+            var nowHp = avatar.HP + hp;
+
+            if (nowHp < 1) nowHp = 1;
+
+            if (nowHp > avatar.HP_Max) nowHp = avatar.HP_Max;
+
+            avatar.HP = nowHp;
+        }
+
+        /// <summary>
+        /// 自定义 Buff Seid 335 角色每受到 X% 血量伤害，获得一个 Y buff Z 层
+        /// </summary>
+        /// <param name="seid">335</param>
+        /// <param name="avatar">释放角色</param>
+        /// <param name="flag">伤害数据</param>
+        /// <param name="instance">Buff 对象实例</param>
+        private static void ListRealizeSeid335(int seid, Avatar avatar, IReadOnlyList<int> flag, Buff instance)
+        {
+            seid.RealizeSeidInfo(null, "Buff");
+
+            var injure = flag[0];
+            var percentage = instance.getSeidJson(seid).GetFieldInt("value1");
+            var buffIds = instance.getSeidJson(seid).GetFieldList("value2");
+            var buffCounts = instance.getSeidJson(seid).GetFieldList("value3");
+
+            if (buffIds.Count == 0)
+            {
+                seid.RealizeSeidWarn("value2 列表数据为空");
+                return;
+            }
+
+            if (buffCounts.Count == 0)
+            {
+                seid.RealizeSeidWarn("value3 列表数据为空");
+                return;
+            }
+
+            if (buffIds.Count != buffCounts.Count)
+            {
+                seid.RealizeSeidWarn("value2 和 value3 列表数据量不对等");
+                return;
+            }
+
+            var hp = avatar.HP_Max * percentage / 100;
+
+            var count = injure / hp;
+
+            for (var i = 0; i < count; i++)
+            {
+                for (var j = 0; j < buffIds.Count; j++)
+                {
+                    avatar.spell.addBuff(buffIds[j], buffCounts[j]);
+                }
             }
         }
     }

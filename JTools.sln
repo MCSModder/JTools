@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JTools", "Src\JTools\JTools
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JTools_Next", "Src\JTools_Next\JTools_Next.csproj", "{70C13368-4DC1-4C66-99FF-352531F1FDB0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JTools_Editor", "Src\JTools_Editor\JTools_Editor.csproj", "{65BA4B9E-149C-485A-81CB-5B620347BBF7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{70C13368-4DC1-4C66-99FF-352531F1FDB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{70C13368-4DC1-4C66-99FF-352531F1FDB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{70C13368-4DC1-4C66-99FF-352531F1FDB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65BA4B9E-149C-485A-81CB-5B620347BBF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65BA4B9E-149C-485A-81CB-5B620347BBF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65BA4B9E-149C-485A-81CB-5B620347BBF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65BA4B9E-149C-485A-81CB-5B620347BBF7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
