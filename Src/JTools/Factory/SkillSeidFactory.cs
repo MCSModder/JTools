@@ -177,17 +177,17 @@ namespace TierneyJohn.MiChangSheng.JTools.Factory
         }
 
         /// <summary>
-        /// Seid153 专属方法
+        /// Seid152 专属方法
         /// </summary>
         /// <param name="skillId">功法编号</param>
         /// <param name="target">目标 (1:自身，2:敌方)</param>
         /// <param name="value1">XBuff</param>
         /// <param name="value2">Y 层</param>
         /// <returns></returns>
-        public static JSONObject GetSeid153Instance(int skillId, int target, int value1, int value2)
+        public static JSONObject GetSeid152Instance(int skillId, int target, int value1, int value2)
         {
             var data = JSONObject.Create();
-            data.AddField("skillid", skillId);
+            data.AddField("id", skillId);
             data.AddField("target", target);
             data.AddField("value1", value1);
             data.AddField("value2", value2);

@@ -1,4 +1,5 @@
-﻿using KBEngine;
+﻿using System.Linq;
+using KBEngine;
 
 namespace TierneyJohn.MiChangSheng.JTools.Util
 {
@@ -104,6 +105,17 @@ namespace TierneyJohn.MiChangSheng.JTools.Util
         public static void AddWuDaoSkill(this (int, int) wuDaoSkill)
         {
             Player.wuDaoMag.addWuDaoSkill(wuDaoSkill.Item1, wuDaoSkill.Item2);
+        }
+
+        /// <summary>
+        /// 获取玩家背包内指定物品数量
+        /// </summary>
+        /// <param name="itemId">物品编号</param>
+        /// <returns>物品数量</returns>
+        public static int GetItemCount(this int itemId)
+        {
+            return Player.itemList.values.Where(info => itemId.Equals(info.itemId) && info.itemCount > 0U)
+                .Select(info => (int)info.itemCount).FirstOrDefault();
         }
     }
 }

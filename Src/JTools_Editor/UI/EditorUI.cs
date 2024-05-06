@@ -1,5 +1,7 @@
 ﻿using TierneyJohn.MiChangSheng.JTools_Editor.Manager;
 using TierneyJohn.MiChangSheng.JTools_Editor.UI.PlotPanel;
+using TierneyJohn.MiChangSheng.JTools.Manager;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,7 +10,7 @@ namespace TierneyJohn.MiChangSheng.JTools_Editor.UI
     /// <summary>
     /// 编辑器主界面
     /// </summary>
-    public class EditorUI : MonoBehaviour, IESCClose
+    public class EditorUI : MonoBehaviour, IUIClose
     {
         public static EditorUI Inst;
 
@@ -19,7 +21,7 @@ namespace TierneyJohn.MiChangSheng.JTools_Editor.UI
         private PlotPanelUI _plotPanel;
         private ResPanelUI _resPanel;
 
-        private Text _panelTitle;
+        private TextMeshProUGUI _panelTitle;
         private Button _exit;
 
         private Button _toolBtn;
@@ -50,7 +52,7 @@ namespace TierneyJohn.MiChangSheng.JTools_Editor.UI
             _plotPanel = transform.GetChild(2).gameObject.AddMissingComponent<PlotPanelUI>();
             _resPanel = transform.GetChild(3).gameObject.AddMissingComponent<ResPanelUI>();
 
-            _panelTitle = _panel.GetChild(1).GetComponent<Text>();
+            _panelTitle = _panel.GetChild(1).GetComponent<TextMeshProUGUI>();
             _exit = _panel.GetChild(2).GetComponent<Button>();
 
             _toolBtn = _panel.GetChild(3).GetChild(0).GetComponent<Button>();
@@ -62,9 +64,14 @@ namespace TierneyJohn.MiChangSheng.JTools_Editor.UI
             _resPanel.gameObject.SetActive(false);
         }
 
+        private void OnEnable()
+        {
+            UICloseManager.Inst.Register(this);
+        }
+
         private void Start()
         {
-            _exit.onClick.AddListener(Close);
+            _exit.onClick.AddListener(TryClose);
             _toolBtn.onClick.AddListener(OnToolTab);
             _plotBtn.onClick.AddListener(OnPlotTab);
             _resBtn.onClick.AddListener(OnResTab);
@@ -73,33 +80,15 @@ namespace TierneyJohn.MiChangSheng.JTools_Editor.UI
             _highSprite = Instantiate(_toolBtn.spriteState.pressedSprite);
         }
 
-        private void OnEnable()
-        {
-            ESCCloseManager.Inst.RegisterClose(this);
-            Tools.canClickFlag = false;
-        }
-
         #endregion
 
         #region 公开方法
 
-        public void Show()
+        public void TryClose()
         {
-            gameObject.SetActive(true);
-        }
-
-        public void Close()
-        {
-            TryEscClose();
-        }
-
-        public bool TryEscClose()
-        {
-            ESCCloseManager.Inst.UnRegisterClose(this);
-            gameObject.SetActive(false);
-            Tools.canClickFlag = true;
             EditorManager.Inst.editorState = false;
-            return true;
+            UICloseManager.Inst.Logout(this);
+            gameObject.SetActive(false);
         }
 
         #endregion
@@ -117,6 +106,12 @@ namespace TierneyJohn.MiChangSheng.JTools_Editor.UI
 
         private void OnPlotTab()
         {
+            if (PlayerEx.Player == null)
+            {
+                UIPopTip.Inst.Pop("该功能仅在游戏内有效！");
+                return;
+            }
+
             _panelTitle.text = PlotTitle;
             _toolPanel.gameObject.SetActive(false);
             _plotPanel.gameObject.SetActive(true);

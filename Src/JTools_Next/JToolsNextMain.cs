@@ -2,14 +2,16 @@
 using HarmonyLib;
 using SkySwordKill.Next.Mod;
 using TierneyJohn.MiChangSheng.JTools;
+using TierneyJohn.MiChangSheng.JTools_Editor;
 using TierneyJohn.MiChangSheng.JTools_Next.Util;
 
 namespace TierneyJohn.MiChangSheng.JTools_Next
 {
     [BepInDependency("TierneyJohn.MiChangSheng.JTools")]
+    [BepInDependency("TierneyJohn.MiChangSheng.JTools_Editor")]
     [BepInDependency("skyswordkill.plugin.Next")]
     [BepInPlugin("TierneyJohn.MiChangSheng.JTools_Next", "JTools_Next", JToolsCoreMain.ModVersion)]
-    public partial class JToolsNextMain : BaseUnityPlugin
+    public class JToolsNextMain : BaseUnityPlugin
     {
         #region NextConfig 配置键声明
 
@@ -18,6 +20,7 @@ namespace TierneyJohn.MiChangSheng.JTools_Next
         private const string UseErrorLogKey = "JTools_UseErrorLog";
         private const string UseSeidExtensionKey = "JTools_UseSeidExtension";
         private const string UseNextExtensionKey = "JTools_UseNextExtension";
+        private const string UseEditor = "JTools_Editor_UseEditor";
 
         #endregion
 
@@ -66,6 +69,7 @@ namespace TierneyJohn.MiChangSheng.JTools_Next
             JToolsCoreMain.UseErrorLog.InitModSettingAction(UseErrorLogKey);
             JToolsCoreMain.UseSeidExtension.InitModSettingAction(UseSeidExtensionKey);
             JToolsCoreMain.UseNextExtension.InitModSettingAction(UseNextExtensionKey);
+            JToolsEditorMain.UseEditor.InitModSettingAction(UseEditor);
         }
 
         private void InitLoadComplete()
@@ -75,6 +79,7 @@ namespace TierneyJohn.MiChangSheng.JTools_Next
             JToolsCoreMain.UseErrorLog.InitModLoadComplete(UseErrorLogKey);
             JToolsCoreMain.UseSeidExtension.InitModLoadComplete(UseSeidExtensionKey);
             JToolsCoreMain.UseNextExtension.InitModLoadComplete(UseNextExtensionKey);
+            JToolsEditorMain.UseEditor.InitModLoadComplete(UseEditor);
         }
 
         private void InitSettingChanged()
@@ -84,6 +89,7 @@ namespace TierneyJohn.MiChangSheng.JTools_Next
             JToolsCoreMain.UseErrorLog.InitModSettingChanged(UseErrorLogKey);
             JToolsCoreMain.UseSeidExtension.InitModSettingChanged(UseSeidExtensionKey);
             JToolsCoreMain.UseNextExtension.InitModSettingChanged(UseNextExtensionKey);
+            JToolsEditorMain.UseEditor.InitModSettingChanged(UseEditor);
         }
 
         #endregion

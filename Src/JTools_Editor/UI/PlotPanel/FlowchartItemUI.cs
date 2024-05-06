@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace TierneyJohn.MiChangSheng.JTools_Editor.UI.PlotPanel
@@ -7,7 +8,7 @@ namespace TierneyJohn.MiChangSheng.JTools_Editor.UI.PlotPanel
     {
         #region 预制体组件
 
-        private Text _flowchartName;
+        private TextMeshProUGUI _flowchartName;
         private Button _button;
 
         #endregion
@@ -16,7 +17,7 @@ namespace TierneyJohn.MiChangSheng.JTools_Editor.UI.PlotPanel
 
         private void Awake()
         {
-            _flowchartName = transform.GetComponent<Text>();
+            _flowchartName = transform.GetComponent<TextMeshProUGUI>();
             _button = transform.GetComponent<Button>();
         }
 

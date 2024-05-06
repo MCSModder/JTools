@@ -120,7 +120,7 @@ namespace TierneyJohn.MiChangSheng.JTools_Editor.UI.PlotPanel
 
         private void ExecuteListener()
         {
-            EditorUI.Inst.Close();
+            EditorUI.Inst.TryClose();
             FungusManager.Inst.TryGetFlowchart(_activeFlowchart, out var flowchart);
             flowchart.ExecuteBlock(_activeBlock);
             $"已通过剧情编辑面板执行：[{_activeFlowchart}]=>[{_activeBlock}]".Warn();

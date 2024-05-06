@@ -32,7 +32,7 @@ namespace TierneyJohn.MiChangSheng.JTools.Patch
 
                         var jCommand = operate.isPrefixPatch
                             ? block.gameObject.AddComponent<JCall>().Create(operate, CallMode.WaitUntilFinished)
-                            : block.gameObject.AddComponent<JCall>().Create(operate, CallMode.Stop);
+                            : block.gameObject.AddComponent<JCall>().Create(operate);
 
                         if (jCommand == null) goto patchFlag;
 

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
+using TierneyJohn.MiChangSheng.JTools.Exception.AssetBundleException;
 using TierneyJohn.MiChangSheng.JTools.Util;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -23,7 +23,6 @@ namespace TierneyJohn.MiChangSheng.JTools.Manager
         #region 私有字段/属性
 
         private readonly Dictionary<string, AssetBundle> _loadAssetBundles = new();
-        private readonly Dictionary<string, string> _sceneNames = new();
         private string _assetBundlePath;
 
         #endregion
@@ -69,6 +68,7 @@ namespace TierneyJohn.MiChangSheng.JTools.Manager
         /// <param name="assetBundleFileName">AssetBundle 文件名称</param>
         /// <param name="assetName">资源名称</param>
         /// <returns>Sprite 数据</returns>
+        [Obsolete("该方法已被弃用，资源加载请使用 GetAsset 方法")]
         public Sprite GetSpriteForTexture2D(string assetBundleFileName, string assetName)
         {
             var asset = GetAsset<Texture2D>(assetBundleFileName, assetName);
@@ -85,18 +85,9 @@ namespace TierneyJohn.MiChangSheng.JTools.Manager
         /// <returns>资源数据</returns>
         public T GetAsset<T>(string assetBundleFileName, string assetName) where T : Object
         {
-            if (TryGetAssetBundle(assetBundleFileName, out var assetBundle))
-            {
-                var asset = assetBundle.LoadAsset<T>(assetName);
-
-                if (asset != null)
-                {
-                    return asset;
-                }
-            }
-
-            assetBundleFileName.AssetBundleLoadWarn("Asset 资源不存在");
-            return default;
+            return TryGetAssetBundle(assetBundleFileName, out var assetBundle)
+                ? assetBundle.LoadAsset<T>(assetName)
+                : default;
         }
 
         /// <summary>
@@ -105,22 +96,18 @@ namespace TierneyJohn.MiChangSheng.JTools.Manager
         /// <param name="assetBundleFileName">AssetBundle 文件名称</param>
         /// <param name="sceneName">Scene 名称</param>
         /// <returns>Scene对象</returns>
+        [Obsolete("该方法已被弃用，场景相关数据加载请使用 LoadScenesAndNoCache 方法")]
         public void CreateScene(string assetBundleFileName, string sceneName)
         {
             TryGetAssetBundle(assetBundleFileName, out var assetBundle);
 
-            if (assetBundle == null)
-            {
-                assetBundleFileName.AssetBundleLoadError("Scene 获取失败");
-                return;
-            }
-
-            _sceneNames.Add(assetBundleFileName, sceneName);
+            if (assetBundle == null) assetBundleFileName.AssetBundleLoadError("Scene 获取失败");
         }
 
         /// <summary>
         /// 加载当前文件夹所有的 AssetBundle 的 Scene 数据 (仅限场景)
         /// </summary>
+        [Obsolete("该方法已被弃用，场景相关数据加载请使用 LoadScenesAndNoCache 方法")]
         public List<string> CreateAllScene()
         {
             var sceneNames = new List<string>();
@@ -135,7 +122,6 @@ namespace TierneyJohn.MiChangSheng.JTools.Manager
 
                     var assetBundle = AssetBundle.LoadFromFile(file.FullName);
                     _loadAssetBundles.Add(assetBundleFileName, assetBundle);
-                    _sceneNames.Add(assetBundleFileName, sceneName);
                     sceneNames.Add(sceneName);
                     assetBundleFileName.AssetBundleLoadInfo();
                 }
@@ -149,6 +135,55 @@ namespace TierneyJohn.MiChangSheng.JTools.Manager
         }
 
         /// <summary>
+        /// 加载当前文件夹内的 AssetBundle 的 Scene 数据
+        /// 但是不会对 AB 数据进行缓存
+        /// </summary>
+        public void LoadScenesAndNoCache()
+        {
+            try
+            {
+                foreach (var file in new DirectoryInfo(_assetBundlePath).GetFiles())
+                {
+                    AssetBundle.LoadFromFile(file.FullName);
+                    file.Name.AssetBundleLoadInfo();
+                }
+            }
+            catch (System.Exception e)
+            {
+                e.Error();
+            }
+        }
+
+        /// <summary>
+        /// 获取一个 AssetBundle 数据并在其上绑定一个 Component 用于访问
+        /// </summary>
+        /// <param name="assetBundleFileName">AssetBundle 文件名称</param>
+        /// <param name="canvasPath">Canvas 预制体组件路径</param>
+        /// <typeparam name="T">绑定的 Component 对象</typeparam>
+        /// <returns>Component 对象</returns>
+        public T LoadUI<T>(string assetBundleFileName, string canvasPath) where T : MonoBehaviour
+        {
+            if (!TryGetAssetBundle(assetBundleFileName, out var assetBundle)) return default;
+
+            var canvasName = string.Empty;
+
+            if (canvasPath.Contains("/"))
+            {
+                var cutIndex = canvasPath.IndexOf('/');
+                canvasName = canvasPath.Substring(cutIndex + 1);
+                canvasPath = canvasPath.Substring(0, cutIndex);
+            }
+
+            if (string.IsNullOrEmpty(canvasName))
+            {
+                return assetBundle.LoadAsset<GameObject>(canvasPath).AddComponent<T>();
+            }
+
+            return assetBundle.LoadAsset<GameObject>(canvasPath).transform.Find(canvasName).gameObject
+                .AddComponent<T>();
+        }
+
+        /// <summary>
         /// 获取一个 AssetBundle 数据并在其上绑定一个 Component 用于访问
         /// </summary>
         /// <param name="assetBundleFileName">AssetBundle 文件名称</param>
@@ -156,6 +191,46 @@ namespace TierneyJohn.MiChangSheng.JTools.Manager
         /// <param name="parent">挂载的父对象 (可省略)</param>
         /// <typeparam name="T">绑定的 Component 对象</typeparam>
         /// <returns>Component 对象</returns>
+        public T LoadUI<T>(string assetBundleFileName, string canvasPath, Transform parent) where T : MonoBehaviour
+        {
+            if (!TryGetAssetBundle(assetBundleFileName, out var assetBundle)) return default;
+
+            var canvasName = string.Empty;
+
+            if (canvasPath.Contains("/"))
+            {
+                var cutIndex = canvasPath.IndexOf('/');
+                canvasName = canvasPath.Substring(cutIndex + 1);
+                canvasPath = canvasPath.Substring(0, cutIndex);
+            }
+
+            try
+            {
+                if (string.IsNullOrEmpty(canvasName))
+                {
+                    return Instantiate(assetBundle.LoadAsset<GameObject>(canvasPath), parent).AddComponent<T>();
+                }
+
+                return Instantiate(assetBundle.LoadAsset<GameObject>(canvasPath)
+                    .transform.Find(canvasName).gameObject, parent).AddComponent<T>();
+            }
+            catch (System.Exception e)
+            {
+                e.Error();
+            }
+
+            return default;
+        }
+
+        /// <summary>
+        /// 获取一个 AssetBundle 数据并在其上绑定一个 Component 用于访问
+        /// </summary>
+        /// <param name="assetBundleFileName">AssetBundle 文件名称</param>
+        /// <param name="canvasPath">Canvas 预制体组件路径</param>
+        /// <param name="parent">挂载的父对象 (可省略)</param>
+        /// <typeparam name="T">绑定的 Component 对象</typeparam>
+        /// <returns>Component 对象</returns>
+        [Obsolete("该方法已被弃用，UI数据加载请使用 LoadUI 方法")]
         public T CreateUI<T>(string assetBundleFileName, string canvasPath, Transform parent = null)
             where T : MonoBehaviour
         {
@@ -220,20 +295,26 @@ namespace TierneyJohn.MiChangSheng.JTools.Manager
         /// <returns>加载结果</returns>
         public bool TryGetAssetBundle(string assetBundleFileName, out AssetBundle assetBundle)
         {
-            if (_loadAssetBundles.TryGetValue(assetBundleFileName, out assetBundle))
-            {
-                return true;
-            }
+            if (_loadAssetBundles.TryGetValue(assetBundleFileName, out assetBundle)) return true;
 
-            assetBundle = LoadAssetBundle(assetBundleFileName);
-            return assetBundle != null;
+            try
+            {
+                assetBundle = LoadAssetBundle(assetBundleFileName);
+                return assetBundle != default;
+            }
+            catch (AssetBundleException e)
+            {
+                e.Error();
+                return false;
+            }
         }
 
         /// <summary>
         /// 加载 AssetBundle 数据 (需要先初始化 AssetBundle 文件路径才行)
         /// </summary>
         /// <param name="assetBundleFileName">AssetBundle 文件名称</param>
-        /// <returns></returns>
+        /// <exception cref="AssetBundleFileNotFoundException">文件不存在异常</exception>
+        /// <returns>AssetBundle 对象</returns>
         public AssetBundle LoadAssetBundle(string assetBundleFileName)
         {
             try
@@ -247,16 +328,14 @@ namespace TierneyJohn.MiChangSheng.JTools.Manager
                     assetBundleFileName.AssetBundleLoadInfo();
                     return assetBundle;
                 }
-
-                assetBundleFileName.AssetBundleLoadWarn("AssetBundle 文件不存在");
-                return null;
             }
             catch (System.Exception e)
             {
-                assetBundleFileName.AssetBundleLoadError(e.Message);
                 e.Error();
-                return null;
+                return default;
             }
+
+            throw new AssetBundleFileNotFoundException(assetBundleFileName);
         }
 
         /// <summary>
@@ -279,16 +358,14 @@ namespace TierneyJohn.MiChangSheng.JTools.Manager
             }
 
             Destroy(assetBundle);
-            _sceneNames.Remove(assetBundleFileName);
             _loadAssetBundles.Remove(assetBundleFileName);
         }
 
         private void SceneShaderFix(Scene scene, LoadSceneMode mode)
         {
-            foreach (var unused in _sceneNames.Values.Where(sceneName => scene.name.ToUpperInvariant() == sceneName))
-            {
-                scene.GetRootGameObjects().InitShader();
-            }
+            if (mode == LoadSceneMode.Additive) return;
+
+            scene.GetRootGameObjects().InitShader();
         }
 
         #endregion

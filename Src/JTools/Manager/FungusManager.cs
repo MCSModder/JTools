@@ -199,7 +199,6 @@ namespace TierneyJohn.MiChangSheng.JTools.Manager
         /// <returns>剧情补丁数据集</returns>
         public List<PatchOperate> GetAllOperates()
         {
-            CheckOperates();
             return _patchOperates;
         }
 
@@ -327,19 +326,6 @@ namespace TierneyJohn.MiChangSheng.JTools.Manager
         #endregion
 
         #region 私有方法
-
-        /// <summary>
-        /// 验证当前剧情补丁数据集
-        /// </summary>
-        private void CheckOperates()
-        {
-            var operatesToRemoves = _patchOperates.Where(operate => operate.isExecute).ToList();
-
-            foreach (var operate in operatesToRemoves)
-            {
-                _patchOperates.Remove(operate);
-            }
-        }
 
         /// <summary>
         /// 验证当前缓存的 Flowchart 数据集

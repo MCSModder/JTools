@@ -4,11 +4,20 @@ using TierneyJohn.MiChangSheng.JTools.Manager;
 namespace TierneyJohn.MiChangSheng.JTools.Patch;
 
 /// <summary>
-/// 战斗相关剧情调用补丁
+/// 战斗相关补丁
 /// </summary>
 [HarmonyPatch]
 public class FightPatch
 {
+    /// <summary>
+    /// 战斗前清空缓存数据
+    /// </summary>
+    [HarmonyPatch(typeof(RoundManager), nameof(RoundManager.gameStart)), HarmonyPrefix]
+    private static void RoundManager_gameStart_Prefix()
+    {
+        BuffSeidPatch.Seid344Dictionary.Clear();
+    }
+
     /// <summary>
     /// 战斗时剧情调用补丁
     /// </summary>

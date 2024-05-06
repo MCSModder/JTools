@@ -3,14 +3,17 @@ using SkySwordKill.NextModEditor.Mod;
 using TierneyJohn.MiChangSheng.JTools;
 using TierneyJohn.MiChangSheng.JTools_Next.Data;
 
-namespace TierneyJohn.MiChangSheng.JTools_Next.Patch
+namespace TierneyJohn.MiChangSheng.JTools_Next.Patch;
+
+[HarmonyPatch(typeof(ModEditorManager))]
+public class ModEditorPatch
 {
-    [HarmonyPatch(typeof(ModEditorManager), nameof(ModEditorManager.Init))]
-    public class ModEditorPatch
+    [HarmonyPatch(nameof(ModEditorManager.Init)), HarmonyPostfix]
+    private static void Init_Postfix()
     {
-        private static void Postfix()
-        {
-            if (JToolsCoreMain.UseNextExtension.Value) ModSeidMetaData.Inst.Load();
-        }
+        if (!JToolsCoreMain.UseNextExtension.Value) return;
+        BuffSeidMetaData.Inst.Load();
+        ItemSeidMetaData.Inst.Load();
+        SkillSeidMetaData.Inst.Load();
     }
 }
