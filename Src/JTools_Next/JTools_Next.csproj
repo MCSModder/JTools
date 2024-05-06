@@ -41,7 +41,9 @@
 
     <!--  项目文件配置  -->
     <ItemGroup>
-        <Compile Include="Data\ModSeidMetaData.cs"/>
+        <Compile Include="Data\BuffSeidMetaData.cs"/>
+        <Compile Include="Data\ItemSeidMetaData.cs"/>
+        <Compile Include="Data\SkillSeidMetaData.cs"/>
         <Compile Include="JToolsNextMain.cs"/>
         <Compile Include="Patch\ModEditorPatch.cs"/>
         <Compile Include="Properties\AssemblyInfo.cs"/>

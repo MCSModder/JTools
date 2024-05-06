@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace TierneyJohn.MiChangSheng.JTools.Util
@@ -14,6 +15,7 @@ namespace TierneyJohn.MiChangSheng.JTools.Util
 
         #region Shader 相关
 
+        [Obsolete("该方法已被弃用，Shader 处理请使用 InitShader(this GameObject gameObject) 方法")]
         public static void InitShader(this Transform transform)
         {
             foreach (var component in transform.GetComponents<Component>())
@@ -49,9 +51,39 @@ namespace TierneyJohn.MiChangSheng.JTools.Util
             }
         }
 
+        public static void InitShader(this SpriteRenderer spriteRenderer)
+        {
+            if (spriteRenderer.material == null)
+            {
+                "Material is Null".Warn();
+                return;
+            }
+
+            var shader = spriteRenderer.material.shader;
+
+            if (shader == null)
+            {
+                "Shader is Null".Warn();
+                return;
+            }
+
+            if (ErrorShaderName.Equals(shader.name))
+            {
+                spriteRenderer.material.shader = Shader.Find(DefaultShaderName);
+            }
+        }
+
+        public static void InitShader(this IEnumerable<SpriteRenderer> spriteRenderers)
+        {
+            foreach (var spriteRenderer in spriteRenderers)
+            {
+                spriteRenderer.InitShader();
+            }
+        }
+
         public static void InitShader(this GameObject gameObject)
         {
-            gameObject.transform.InitShader();
+            gameObject.GetComponentsInChildren<SpriteRenderer>(true).InitShader();
         }
 
         public static void InitShader(this IEnumerable<GameObject> gameObjects)

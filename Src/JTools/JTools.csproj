@@ -22,7 +22,7 @@
         <DebugSymbols>true</DebugSymbols>
         <DebugType>full</DebugType>
         <Optimize>false</Optimize>
-        <OutputPath>../../Bin/Debug/</OutputPath>
+        <OutputPath>F:\SteamLibrary\steamapps\common\觅长生\本地Mod测试\JTools\plugins/</OutputPath>
         <DefineConstants>DEBUG;TRACE</DefineConstants>
         <ErrorReport>prompt</ErrorReport>
         <WarningLevel>4</WarningLevel>
@@ -43,6 +43,8 @@
     <ItemGroup>
         <Compile Include="Exception\ArchiveException\ArchiveException.cs"/>
         <Compile Include="Exception\ArchiveException\ArchiveFileNotExistException.cs"/>
+        <Compile Include="Exception\AssetBundleException\AssetBundleException.cs"/>
+        <Compile Include="Exception\AssetBundleException\AssetBundleFileNotFoundException.cs"/>
         <Compile Include="Factory\ArmorItemFactory.cs"/>
         <Compile Include="Factory\AuctionFactory.cs"/>
         <Compile Include="Factory\AvatarFactory.cs"/>
@@ -55,6 +57,7 @@
         <Compile Include="Factory\ElixirItemFactory.cs"/>
         <Compile Include="Factory\IllustratedFactory.cs"/>
         <Compile Include="Factory\ItemJsonFactory.cs"/>
+        <Compile Include="Factory\ItemSeidFactory.cs"/>
         <Compile Include="Factory\MapOptionFactory.cs"/>
         <Compile Include="Factory\NpcActionFactory.cs"/>
         <Compile Include="Factory\NpcFactory.cs"/>
@@ -70,10 +73,15 @@
         <Compile Include="Factory\TaskFactory.cs"/>
         <Compile Include="Factory\WeaponItemFactory.cs"/>
         <Compile Include="Fungus\JCommand\JAddBiography.cs"/>
+        <Compile Include="Fungus\JCommand\JAddExp.cs"/>
+        <Compile Include="Fungus\JCommand\JAddHp.cs"/>
+        <Compile Include="Fungus\JCommand\JAddHpMax.cs"/>
         <Compile Include="Fungus\JCommand\JAddItem.cs"/>
         <Compile Include="Fungus\JCommand\JAddItemToNpc.cs"/>
         <Compile Include="Fungus\JCommand\JAddLingGuang.cs"/>
         <Compile Include="Fungus\JCommand\JAddMoney.cs"/>
+        <Compile Include="Fungus\JCommand\JAddMood.cs"/>
+        <Compile Include="Fungus\JCommand\JAddNpcFavor.cs"/>
         <Compile Include="Fungus\JCommand\JAddTask.cs"/>
         <Compile Include="Fungus\JCommand\JAddTime.cs"/>
         <Compile Include="Fungus\JCommand\JAfterFight.cs"/>
@@ -85,13 +93,18 @@
         <Compile Include="Fungus\JCommand\JInnerFight.cs"/>
         <Compile Include="Fungus\JCommand\JLearningSkill.cs"/>
         <Compile Include="Fungus\JCommand\JLearningStaticSkill.cs"/>
+        <Compile Include="Fungus\JCommand\JLoadGame.cs"/>
+        <Compile Include="Fungus\JCommand\JLoadScene.cs"/>
         <Compile Include="Fungus\JCommand\JMenu.cs"/>
         <Compile Include="Fungus\JCommand\JNextTask.cs"/>
+        <Compile Include="Fungus\JCommand\JOpenShop.cs"/>
         <Compile Include="Fungus\JCommand\JOr.cs"/>
         <Compile Include="Fungus\JCommand\JPlayMusic.cs"/>
         <Compile Include="Fungus\JCommand\JPlayEffect.cs"/>
         <Compile Include="Fungus\JCommand\JPopTip.cs"/>
+        <Compile Include="Fungus\JCommand\JRestoreHp.cs"/>
         <Compile Include="Fungus\JCommand\JRun.cs"/>
+        <Compile Include="Fungus\JCommand\JAutoSave.cs"/>
         <Compile Include="Fungus\JCommand\JSay.cs"/>
         <Compile Include="Fungus\JCommand\JShakeCamera.cs"/>
         <Compile Include="Fungus\JCommand\JShowCg.cs"/>
@@ -106,15 +119,19 @@
         <Compile Include="Manager\FungusManager.cs"/>
         <Compile Include="Manager\MapEventManager.cs"/>
         <Compile Include="Manager\TimeFlagManager.cs"/>
+        <Compile Include="Manager\UICloseManager.cs"/>
         <Compile Include="Model\MapEvent.cs"/>
         <Compile Include="Model\MapEventData.cs"/>
         <Compile Include="Model\TimeFlag.cs"/>
         <Compile Include="Patch\BuffSeidPatch.cs"/>
         <Compile Include="Patch\FightPatch.cs"/>
         <Compile Include="Patch\FlowchartPatch.cs"/>
+        <Compile Include="Patch\ItemSeidPatch.cs"/>
         <Compile Include="Patch\MapEventPatch.cs"/>
         <Compile Include="Patch\SayDialogPatch.cs"/>
+        <Compile Include="Patch\SkillSeidPatch.cs"/>
         <Compile Include="Tool\FungusTools.cs"/>
+        <Compile Include="Tool\SceneTools.cs"/>
         <Compile Include="Util\ArchiveUtil.cs"/>
         <Compile Include="Util\AvatarUtil.cs"/>
         <Compile Include="Util\DataCloneUtil.cs"/>

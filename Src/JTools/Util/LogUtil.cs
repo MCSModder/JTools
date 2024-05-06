@@ -105,18 +105,6 @@ namespace TierneyJohn.MiChangSheng.JTools.Util
         }
 
         /// <summary>
-        /// 文件存档异常信息打印
-        /// </summary>
-        /// <param name="fileName">文件名称</param>
-        /// <param name="message">额外打印信息</param>
-        public static void SaveError(this string fileName, object message = null)
-        {
-            Error(message == null
-                ? $"[{fileName}]数据归档失败"
-                : $"[{fileName}]数据归档失败: {message}");
-        }
-
-        /// <summary>
         /// 文件读取常规信息打印
         /// </summary>
         /// <param name="fileName">文件名称</param>
@@ -129,25 +117,13 @@ namespace TierneyJohn.MiChangSheng.JTools.Util
         }
 
         /// <summary>
-        /// 文件读取警告信息打印
+        /// 文件读取常规信息打印
         /// </summary>
         /// <param name="fileName">文件名称</param>
         /// <param name="message">额外打印信息</param>
         public static void LoadWarn(this string fileName, object message = null)
         {
             Warn(message == null
-                ? $"[{fileName}]数据读取异常"
-                : $"[{fileName}]数据读取异常: {message}");
-        }
-
-        /// <summary>
-        /// 文件读取异常信息打印
-        /// </summary>
-        /// <param name="fileName">文件名称</param>
-        /// <param name="message">额外打印信息</param>
-        public static void LoadError(this string fileName, object message = null)
-        {
-            Error(message == null
                 ? $"[{fileName}]数据读取失败"
                 : $"[{fileName}]数据读取失败: {message}");
         }

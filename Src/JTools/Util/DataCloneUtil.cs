@@ -16,7 +16,7 @@ namespace TierneyJohn.MiChangSheng.JTools.Util
         /// <returns>Clone 数据</returns>
         public static List<T> Clone<T>(this IEnumerable<T> origin)
         {
-            return origin.ToList();
+            return origin == null ? [] : origin.ToList();
         }
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace TierneyJohn.MiChangSheng.JTools.Util
         /// <returns>Clone 数据</returns>
         public static Dictionary<TK, TV> Clone<TK, TV>(this Dictionary<TK, TV> origin)
         {
-            return origin.ToDictionary(item => item.Key, item => item.Value);
+            return origin == null || !origin.Any() ? [] : origin.ToDictionary(item => item.Key, item => item.Value);
         }
     }
 }

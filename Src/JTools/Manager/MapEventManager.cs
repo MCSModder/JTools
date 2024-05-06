@@ -66,24 +66,21 @@ namespace TierneyJohn.MiChangSheng.JTools.Manager
             {
                 if (string.IsNullOrEmpty(mapEvent.resetTime)) continue;
 
-                if (PlayerEx.Player.worldTimeMag.getNowTime() >= DateTime.Parse(mapEvent.resetTime))
+                if (PlayerEx.Player.worldTimeMag.getNowTime() < DateTime.Parse(mapEvent.resetTime)) continue;
+
+                var nodes = AllMapRandomNode.list.FindAll(item =>
+                    item.GetFieldInt(Type) == mapEvent.eventType && item.GetFieldInt(EventId) == mapEvent.eventId);
+
+                foreach (var node in nodes)
                 {
-                    var nodes = AllMapRandomNode.list.FindAll(item =>
-                        item.GetFieldInt(Type) == mapEvent.eventType && item.GetFieldInt(EventId) == mapEvent.eventId);
-
-                    foreach (var node in nodes)
-                    {
-                        node.SetField(EventId, "0");
-                        node.SetField(Type, 2);
-                        node.SetField(Reset, false);
-                        node.SetField(ResetTime, "0001-1-1");
-                    }
-
-                    mapEvent.result = true;
+                    node.SetField(EventId, "0");
+                    node.SetField(Type, 2);
+                    node.SetField(Reset, false);
+                    node.SetField(ResetTime, "0001-1-1");
                 }
-            }
 
-            CheckMapEvent();
+                mapEvent.result = true;
+            }
         }
 
         /// <summary>
@@ -165,8 +162,6 @@ namespace TierneyJohn.MiChangSheng.JTools.Manager
         /// <param name="mapEvent">MapEvent 事件对象</param>
         public void AddMapEvent(MapEvent mapEvent)
         {
-            CheckMapEvent();
-
             var eventId = mapEvent.eventId;
 
             if (_mapEvent.ContainsKey(eventId))
@@ -212,21 +207,6 @@ namespace TierneyJohn.MiChangSheng.JTools.Manager
         {
             _mapEventData.TryGetValue(eventId, out var eventData);
             return eventData;
-        }
-
-        #endregion
-
-        #region 私有方法
-
-        private void CheckMapEvent()
-        {
-            var keysToRemove = _mapEvent.Where(item => item.Value == null || item.Value.result)
-                .Select(item => item.Key).ToList();
-
-            foreach (var key in keysToRemove)
-            {
-                _mapEvent.Remove(key);
-            }
         }
 
         #endregion

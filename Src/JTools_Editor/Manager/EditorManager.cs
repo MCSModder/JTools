@@ -14,9 +14,9 @@ namespace TierneyJohn.MiChangSheng.JTools_Editor.Manager
         #region 字段/属性
 
         public static EditorManager Inst;
-
+        private static Transform NewUI => NewUICanvas.Inst.transform;
+        private static readonly bool UseEditor = JToolsEditorMain.UseEditor.Value;
         private static readonly KeyCode OpenEditorKeyCode = JToolsEditorMain.OpenEditor.Value;
-        private static Transform MainPanel => NewUICanvas.Inst.transform;
         public bool editorState;
 
         #endregion
@@ -42,7 +42,7 @@ namespace TierneyJohn.MiChangSheng.JTools_Editor.Manager
 
         private void Update()
         {
-            if (PlayerEx.Player == null) return;
+            if (!UseEditor) return;
             if (editorState || !Input.GetKeyDown(OpenEditorKeyCode)) return;
 
             editorState = true;
@@ -106,14 +106,14 @@ namespace TierneyJohn.MiChangSheng.JTools_Editor.Manager
 
         private void LoadEditorUI()
         {
-            if (EditorUI.Inst == null)
+            if (EditorUI.Inst)
             {
-                AssetBundleManager.Inst.SetAssetBundlePatch(typeof(JToolsEditorMain));
-                AssetBundleManager.Inst.CreateUI<EditorUI>(EditorFileName, EditorComponentName, MainPanel);
+                EditorUI.Inst.gameObject.SetActive(true);
             }
             else
             {
-                EditorUI.Inst.Show();
+                AssetBundleManager.Inst.SetAssetBundlePatch(typeof(JToolsEditorMain));
+                AssetBundleManager.Inst.LoadUI<EditorUI>(EditorFileName, EditorComponentName, NewUI);
             }
         }
 

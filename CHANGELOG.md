@@ -1,5 +1,88 @@
 # CHANGELOG
 
+## [2.1.14] - 2024-05-03
+
+### Features
+
+* [[BTC-T-318](https://mcs.jetbrains.space/p/btc/issues/318)] JT-v2.1.14-优化部分自定义Seid处理
+* [[BTC-T-320](https://mcs.jetbrains.space/p/btc/issues/320)] JT-v2.1.14-版本更新
+
+### Fix
+
+* [[BTC-T-317](https://mcs.jetbrains.space/p/btc/issues/317)] JT-v2.1.14-修复BuffSeid340无法正常使用问题
+* [[BTC-T-319](https://mcs.jetbrains.space/p/btc/issues/319)] JT-v2.1.14-修复SkillSeid199导致的血量上限修改异常问题
+
+## [2.1.13] - 2024-05-03
+
+### Features
+
+* [[BTC-T-313](https://mcs.jetbrains.space/p/btc/issues/313)] JT-v2.1.13-新增自定义Seid
+* [[BTC-T-314](https://mcs.jetbrains.space/p/btc/issues/314)] JT-v2.1.13-部分自定义特性添加技能高亮效果
+* [[BTC-T-315](https://mcs.jetbrains.space/p/btc/issues/315)] JT-v2.1.13-版本更新
+
+## [2.1.12] - 2024-04-17
+
+### Features
+
+* [[BTC-T-311](https://mcs.jetbrains.space/p/btc/issues/311)] JT-v2.1.12-新增自定义Seid
+* [[BTC-T-312](https://mcs.jetbrains.space/p/btc/issues/312)] JT-v2.1.12-版本更新
+
+### Fix
+
+* [[BTC-T-310](https://mcs.jetbrains.space/p/btc/issues/310)] JT-v2.1.12-修复数据优化导致的部分数据存读档缺失问题
+
+## [2.1.11] - 2024-04-05
+
+### Features
+
+* [[BTC-T-297](https://mcs.jetbrains.space/p/btc/issues/297)] JT-v2.1.11-优化委托方法调用
+* [[BTC-T-298](https://mcs.jetbrains.space/p/btc/issues/298)] JT-v2.1.11-版本更新
+
+## [2.1.10] - 2024-04-01
+
+### Features
+
+* [[BTC-T-291](https://mcs.jetbrains.space/p/btc/issues/291)] JT-v2.1.10-新增一系列自定义Seid
+* [[BTC-T-292](https://mcs.jetbrains.space/p/btc/issues/292)] JT-v2.1.10-版本更新
+
+## [2.1.9] - 2024-03-30
+
+### Features
+
+* [[BTC-T-250](https://mcs.jetbrains.space/p/btc/issues/250)] JT-v2.1.9-新增UICloseManager相关实现
+* [[BTC-T-251](https://mcs.jetbrains.space/p/btc/issues/251)] JT-v2.1.9-新增编辑器主界面显示配置
+* [[BTC-T-252](https://mcs.jetbrains.space/p/btc/issues/252)] JT-v2.1.9-新增自定义神通Seid
+* [[BTC-T-254](https://mcs.jetbrains.space/p/btc/issues/254)] JT-v2.1.9-新增"Archive"相关工具方法
+* [[BTC-T-276](https://mcs.jetbrains.space/p/btc/issues/276)] JT-v2.1.9-新增剧情指令
+* [[BTC-T-277](https://mcs.jetbrains.space/p/btc/issues/277)] JT-v2.1.9-新增工厂方法
+* [[BTC-T-278](https://mcs.jetbrains.space/p/btc/issues/278)] JT-v2.1.9-新增自定义Seid
+* [[BTC-T-279](https://mcs.jetbrains.space/p/btc/issues/279)] JT-v2.1.9-版本更新
+
+### Fix
+
+* [[BTC-T-253](https://mcs.jetbrains.space/p/btc/issues/253)] JT-v2.1.9-修复"JIf","JOr"指令可能导致的剧情数据异常问题
+
+## [2.1.8] - 2024-03-17
+
+### Features
+
+* [[BTC-T-237](https://mcs.jetbrains.space/p/btc/issues/237)] JT-v2.1.8-优化AB资源加载方式
+* [[BTC-T-238](https://mcs.jetbrains.space/p/btc/issues/238)] JT-v2.1.8-优化异常处理方式
+* [[BTC-T-239](https://mcs.jetbrains.space/p/btc/issues/239)] JT-v2.1.8-优化部分工具方法
+* [[BTC-T-240](https://mcs.jetbrains.space/p/btc/issues/240)] JT-v2.1.8-版本更新
+
+## [2.1.7] - 2024-03-13
+
+### Features
+
+* [[BTC-T-212](https://mcs.jetbrains.space/p/btc/issues/212)] JT-v2.1.7-新增剧情指令
+* [[BTC-T-213](https://mcs.jetbrains.space/p/btc/issues/213)] JT-v2.1.7-添加新的场景加载方式
+* [[BTC-T-214](https://mcs.jetbrains.space/p/btc/issues/214)] JT-v2.1.7-优化Shader修复模式
+* [[BTC-T-215](https://mcs.jetbrains.space/p/btc/issues/215)] JT-v2.1.7-对即将弃用方法添加 Obsolete 标注
+* [[BTC-T-223](https://mcs.jetbrains.space/p/btc/issues/223)] JT-v2.1.7-重置编辑器画面，优化文字显示清晰度
+* [[BTC-T-224](https://mcs.jetbrains.space/p/btc/issues/224)] JT-v2.1.7-新增编辑器开关配置，新增场景加载功能
+* [[BTC-T-225](https://mcs.jetbrains.space/p/btc/issues/225)] JT-v2.1.7-版本更新
+
 ## [2.1.6] - 2024-03-08
 
 ### Features

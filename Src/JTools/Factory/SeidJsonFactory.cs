@@ -135,6 +135,24 @@ namespace TierneyJohn.MiChangSheng.JTools.Factory
         /// <param name="value1">值</param>
         /// <param name="value2">值</param>
         /// <param name="value3">值</param>
+        /// <returns>JSONObject 实例</returns>
+        public static JSONObject GetThreeSeidInstance(int id, int value1, int value2, int value3)
+        {
+            var data = JSONObject.Create();
+            data.AddField("id", id);
+            data.AddField("value1", value1);
+            data.AddField("value2", value2);
+            data.AddField("value3", value3);
+            return data;
+        }
+
+        /// <summary>
+        /// 获取四值 Seid
+        /// </summary>
+        /// <param name="id">编号</param>
+        /// <param name="value1">值</param>
+        /// <param name="value2">值</param>
+        /// <param name="value3">值</param>
         /// <param name="value4">值</param>
         /// <returns>JSONObject 实例</returns>
         public static JSONObject GetFourSeidInstance(int id, int value1, int value2, int value3, int value4)
@@ -145,6 +163,27 @@ namespace TierneyJohn.MiChangSheng.JTools.Factory
             data.AddField("value2", value2);
             data.AddField("value3", value3);
             data.AddField("value4", value4);
+            return data;
+        }
+
+        /// <summary>
+        /// 获取四值 Seid
+        /// </summary>
+        /// <param name="id">编号</param>
+        /// <param name="value1">值</param>
+        /// <param name="value2">值</param>
+        /// <param name="value3">值</param>
+        /// <param name="value4">值</param>
+        /// <returns>JSONObject 实例</returns>
+        public static JSONObject GetFourSeidInstance(int id, List<int> value1, List<int> value2, List<int> value3,
+            List<int> value4)
+        {
+            var data = JSONObject.Create();
+            data.AddField("id", id);
+            data.AddField("value1", value1.ToJsonObject());
+            data.AddField("value2", value2.ToJsonObject());
+            data.AddField("value3", value3.ToJsonObject());
+            data.AddField("value4", value4.ToJsonObject());
             return data;
         }
     }

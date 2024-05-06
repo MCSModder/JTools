@@ -17,7 +17,7 @@ namespace TierneyJohn.MiChangSheng.JTools
         /// <summary>
         /// JTools 插件版本信息
         /// </summary>
-        public const string ModVersion = "2.1.6";
+        public const string ModVersion = "2.1.14";
 
         /// <summary>
         /// JTools Log 日志打印方法封装
@@ -37,8 +37,6 @@ namespace TierneyJohn.MiChangSheng.JTools
         /// <param name="message">异常信息</param>
         public static void Error(object message) => I.Logger.LogError(message);
 
-        public static GameObject JTools => I._jTools;
-
         public static ConfigEntry<bool> UseInfoLog => I._useInfoLog;
         public static ConfigEntry<bool> UseWarnLog => I._useWarnLog;
         public static ConfigEntry<bool> UseErrorLog => I._useErrorLog;
@@ -56,7 +54,6 @@ namespace TierneyJohn.MiChangSheng.JTools
 
         private const string HarmonyPatchPath = "TierneyJohn.MiChangSheng.BepInExPlugin.JTools.Patch";
         private Harmony _harmony;
-        private GameObject _jTools;
 
         private ConfigEntry<bool> _useInfoLog;
         private ConfigEntry<bool> _useWarnLog;
@@ -98,14 +95,14 @@ namespace TierneyJohn.MiChangSheng.JTools
 
         private void InitManager()
         {
-            _jTools = new GameObject(
+            DontDestroyOnLoad(new GameObject(
                 "JTools",
                 typeof(AssetBundleManager),
                 typeof(CanvasManager),
                 typeof(FungusManager),
                 typeof(MapEventManager),
-                typeof(TimeFlagManager));
-            DontDestroyOnLoad(_jTools);
+                typeof(UICloseManager),
+                typeof(TimeFlagManager)));
         }
 
         #endregion
