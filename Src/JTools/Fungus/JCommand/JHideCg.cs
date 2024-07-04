@@ -13,13 +13,10 @@ namespace TierneyJohn.MiChangSheng.JTools.Fungus.JCommand
         #region 构造方法
 
         /// <summary>
-        /// 隐藏 CG 显示
+        /// 隐藏静态 CG 显示
         /// </summary>
         /// <returns>JHideCg 对象</returns>
-        public JHideCg Create()
-        {
-            return this;
-        }
+        public JHideCg Create() { return this; }
 
         #endregion
 
@@ -27,7 +24,7 @@ namespace TierneyJohn.MiChangSheng.JTools.Fungus.JCommand
 
         public override void OnEnter()
         {
-            CanvasManager.Inst.Close();
+            CgManager.Inst.HideCg();
             Continue();
         }
 

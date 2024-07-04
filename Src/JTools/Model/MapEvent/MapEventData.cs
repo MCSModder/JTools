@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace TierneyJohn.MiChangSheng.JTools.Model
+namespace TierneyJohn.MiChangSheng.JTools.Model.MapEvent
 {
     /// <summary>
     /// 大地图事件数据信息封装类
@@ -56,8 +56,15 @@ namespace TierneyJohn.MiChangSheng.JTools.Model
 
         #region 构造函数
 
-        public MapEventData(int eventId, int eventType, string title, string content, List<(int, string)> options,
-            Action action, bool isFinal = false)
+        public MapEventData(
+            int eventId,
+            int eventType,
+            string title,
+            string content,
+            List<(int, string)> options,
+            Action action,
+            bool isFinal = false
+        )
         {
             this.eventId = eventId;
             this.eventType = eventType;

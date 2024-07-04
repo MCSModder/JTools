@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TierneyJohn.MiChangSheng.JTools.Model
+namespace TierneyJohn.MiChangSheng.JTools.Model.MapEvent
 {
     /// <summary>
     /// 大地图事件数据封装类
@@ -65,8 +65,16 @@ namespace TierneyJohn.MiChangSheng.JTools.Model
 
         #region 构造函数
 
-        public MapEvent(int eventId, int eventType, EvaluateDelegate evaluate, string resetTime = "", int nodeIndex = 0,
-            bool once = true, bool refreshFlag = false, bool result = false)
+        public MapEvent(
+            int eventId,
+            int eventType,
+            EvaluateDelegate evaluate,
+            string resetTime = "",
+            int nodeIndex = 0,
+            bool once = true,
+            bool refreshFlag = false,
+            bool result = false
+        )
         {
             this.eventId = eventId;
             this.eventType = eventType;

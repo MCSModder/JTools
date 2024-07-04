@@ -56,10 +56,7 @@ public static class ArchiveUtil
     /// <param name="data">归档数据</param>
     /// <typeparam name="T">归档数据类型</typeparam>
     /// <returns>归档结果</returns>
-    public static bool Archive<T>(this string fileName, T data)
-    {
-        return Archive(fileName, GetArchivePath(), data);
-    }
+    public static bool Archive<T>(this string fileName, T data) { return Archive(fileName, GetArchivePath(), data); }
 
     /// <summary>
     /// 获取归档文件数据方法
@@ -202,22 +199,35 @@ public static class ArchiveUtil
     }
 
     /// <summary>
+    /// 验证归档文件数据是否存在
+    /// </summary>
+    /// <param name="fileName">归档文件名称</param>
+    /// <returns>归档数据验证结果</returns>
+    public static bool HasArchive(this string fileName) { return HasArchive(fileName, GetArchivePath()); }
+
+    /// <summary>
+    /// 验证归档文件数据是否存在
+    /// </summary>
+    /// <param name="fileName">归档文件名称</param>
+    /// <param name="path">归档文件路径</param>
+    /// <returns>归档数据验证结果</returns>
+    public static bool HasArchive(this string fileName, string path)
+    {
+        var archivePath = $"{path}/{fileName}";
+        return File.Exists(archivePath);
+    }
+
+    /// <summary>
     /// 根据文件名称，获取当前游戏存档的文件路径
     /// </summary>
-    public static string GetArchivePath()
-    {
-        return $"{Paths.GetNewSavePath()}/{YSNewSaveSystem.NowAvatarPathPre}";
-    }
+    public static string GetArchivePath() { return $"{Paths.GetNewSavePath()}/{YSNewSaveSystem.NowAvatarPathPre}"; }
 
     /// <summary>
     /// 根据文件名称，获取当前游戏存档的文件路径 (基于这个文件名本身的路径)
     /// </summary>
     /// <param name="fileName">归档文件名称</param>
     /// <returns>完整文件路径</returns>
-    public static string GetArchivePath(this string fileName)
-    {
-        return $"{GetArchivePath()}/{fileName}";
-    }
+    public static string GetArchivePath(this string fileName) { return $"{GetArchivePath()}/{fileName}"; }
 
     /// <summary>
     /// 根据文件名称，获取指定存档编号的文件路径 (基于这个文件名本身的路径)

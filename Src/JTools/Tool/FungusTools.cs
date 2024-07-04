@@ -232,8 +232,13 @@ public static class FungusTools
     /// <param name="targetBlockName">待跳转 Block 对象名称</param>
     /// <param name="commandItemId">待跳转 Command ItemId</param>
     /// <param name="mode">跳转模式</param>
-    public static JBlock Call(this JBlock block, string targetFlowchartName, string targetBlockName,
-        int commandItemId = -1, CallMode mode = CallMode.Stop)
+    public static JBlock Call(
+        this JBlock block,
+        string targetFlowchartName,
+        string targetBlockName,
+        int commandItemId = -1,
+        CallMode mode = CallMode.Stop
+    )
     {
         block.CreateCommand<JCall>().Create(targetBlockName, targetFlowchartName, commandItemId, mode);
         return block;
@@ -291,12 +296,22 @@ public static class FungusTools
     }
 
     /// <summary>
-    /// 隐藏 CG 显示
+    /// 隐藏静态 CG 显示
     /// </summary>
     /// <param name="block">JBlock 对象</param>
     public static JBlock HideCg(this JBlock block)
     {
         block.CreateCommand<JHideCg>().Create();
+        return block;
+    }
+
+    /// <summary>
+    /// 隐藏动态 CG 显示
+    /// </summary>
+    /// <param name="block">JBlock 对象</param>
+    public static JBlock HideSpineCg(this JBlock block)
+    {
+        block.CreateCommand<JHideSpineCg>().Create();
         return block;
     }
 
@@ -514,8 +529,12 @@ public static class FungusTools
     /// <param name="message">消息内容</param>
     /// <param name="type">消息类型</param>
     /// <param name="sound">播放声音名称</param>
-    public static JBlock PopTip(this JBlock block, string message, PopTipIconType type = PopTipIconType.叹号,
-        string sound = "")
+    public static JBlock PopTip(
+        this JBlock block,
+        string message,
+        PopTipIconType type = PopTipIconType.叹号,
+        string sound = ""
+    )
     {
         block.CreateCommand<JPopTip>().Create(message, type, sound);
         return block;
@@ -616,13 +635,25 @@ public static class FungusTools
     }
 
     /// <summary>
-    /// 显示 CG 指令
+    /// 显示静态 CG 指令
     /// </summary>
     /// <param name="block">JBlock 对象</param>
     /// <param name="sprite">sprite 资源对象</param>
     public static JBlock ShowCg(this JBlock block, Sprite sprite)
     {
         block.CreateCommand<JShowCg>().Create(sprite);
+        return block;
+    }
+
+    /// <summary>
+    /// 显示动态 CG 指令
+    /// </summary>
+    /// <param name="block">JBlock 对象</param>
+    /// <param name="spineName">Spine 场景名称</param>
+    /// <param name="skinName">Skin 名称</param>
+    public static JBlock ShowSpineCg(this JBlock block, string spineName, string skinName)
+    {
+        block.CreateCommand<JShowSpineCg>().Create(spineName, skinName);
         return block;
     }
 
@@ -638,12 +669,21 @@ public static class FungusTools
     /// <param name="isSea">是否为海上NPC(战斗后会移除)</param>
     /// <param name="playerBuffs">战斗时主角额外buff</param>
     /// <param name="monsterBuffs">战斗时对象额外buff</param>
-    public static JBlock StartFight(this JBlock block, int monsterId, StartFight.FightEnumType fightType,
-        bool canRun = true, int backgroundId = 0, string music = "战斗1", bool isSea = false,
-        List<StarttFightAddBuff> playerBuffs = null, List<StarttFightAddBuff> monsterBuffs = null)
+    public static JBlock StartFight(
+        this JBlock block,
+        int monsterId,
+        StartFight.FightEnumType fightType,
+        bool canRun = true,
+        int backgroundId = 0,
+        string music = "战斗1",
+        bool isSea = false,
+        List<StarttFightAddBuff> playerBuffs = null,
+        List<StarttFightAddBuff> monsterBuffs = null
+    )
     {
-        block.CreateCommand<JStartFight>().Create(monsterId, fightType, canRun, backgroundId, music, isSea,
-            playerBuffs, monsterBuffs);
+        block.CreateCommand<JStartFight>()
+            .Create(monsterId, fightType, canRun, backgroundId, music, isSea, playerBuffs, monsterBuffs);
+
         return block;
     }
 
