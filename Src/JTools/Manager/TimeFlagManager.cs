@@ -2,9 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using TierneyJohn.MiChangSheng.JTools.Model;
+using TierneyJohn.MiChangSheng.JTools.Model.TimeFlag;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace TierneyJohn.MiChangSheng.JTools.Manager;
 
@@ -21,10 +20,7 @@ public class TimeFlagManager : MonoBehaviour
 
     #region Unity 事件函数
 
-    private void Awake()
-    {
-        Inst = this;
-    }
+    private void Awake() { Inst = this; }
 
     private void Start()
     {
@@ -48,10 +44,7 @@ public class TimeFlagManager : MonoBehaviour
         RegisterTimeFlag(timeFlag.id, timeFlag);
     }
 
-    public void RegisterTimeFlag(string key, TimeFlag timeFlag)
-    {
-        _timeFlags[key] = timeFlag;
-    }
+    public void RegisterTimeFlag(string key, TimeFlag timeFlag) { _timeFlags[key] = timeFlag; }
 
     public void RemoveTimeFlag(string key)
     {
@@ -68,10 +61,7 @@ public class TimeFlagManager : MonoBehaviour
         RegisterTimeFlag(timeFlag.id, timeFlag);
     }
 
-    private void AfterComplete(MessageData data = null)
-    {
-        StartCoroutine(AfterCompleteAction());
-    }
+    private void AfterComplete(MessageData data = null) { StartCoroutine(AfterCompleteAction()); }
 
     private IEnumerator AfterCompleteAction()
     {
@@ -97,5 +87,3 @@ public class TimeFlagManager : MonoBehaviour
 
     #endregion
 }
-
-internal class TimeFlagEvent : UnityEvent<string, Action, bool>;

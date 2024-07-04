@@ -1,5 +1,56 @@
 # CHANGELOG
 
+## [2.1.15] - 2024-07-03
+
+### Features
+
+* [[BTC-T-333](https://mcs.jetbrains.space/p/btc/issues/333)] JT-v2.1.15-针对Spine数据提供支持
+* [[BTC-T-334](https://mcs.jetbrains.space/p/btc/issues/334)] JT-v2.1.15-基于现有功能，提供Next指令支持
+    * [[BTC-T-337](https://mcs.jetbrains.space/p/btc/issues/337)] JT-v2.1.15-新增CG相关Next指令
+    * [[BTC-T-338](https://mcs.jetbrains.space/p/btc/issues/338)] JT-v2.1.15-新增战斗相关Next指令
+    * [[BTC-T-339](https://mcs.jetbrains.space/p/btc/issues/339)] JT-v2.1.15-新增Mod相关Next指令
+    * [[BTC-T-340](https://mcs.jetbrains.space/p/btc/issues/340)] JT-v2.1.15-新增Task相关Next指令
+    * [[BTC-T-341](https://mcs.jetbrains.space/p/btc/issues/341)] JT-v2.1.15-新增Scene相关Next指令
+    * [[BTC-T-342](https://mcs.jetbrains.space/p/btc/issues/342)] JT-v2.1.15-新增MapEvent相关Next指令
+    * [[BTC-T-343](https://mcs.jetbrains.space/p/btc/issues/343)] JT-v2.1.15-新增AssetBundle相关Next指令
+* [[BTC-T-335](https://mcs.jetbrains.space/p/btc/issues/335)] JT-v2.1.15-新增Spine动态CG显示指令
+* [[BTC-T-344](https://mcs.jetbrains.space/p/btc/issues/344)] JT-v2.1.15-新增WIKI相关文件
+    * [[BTC-T-346](https://mcs.jetbrains.space/p/btc/issues/346)] JT-v2.1.15-新增Next指令描述
+    * [[BTC-T-348](https://mcs.jetbrains.space/p/btc/issues/348)] JT-v2.1.15-新增AssetBundleManager相关描述
+    * [[BTC-T-350](https://mcs.jetbrains.space/p/btc/issues/350)] JT-v2.1.15-新增SpineManager相关描述
+    * [[BTC-T-353](https://mcs.jetbrains.space/p/btc/issues/353)] JT-v2.1.15-新增CgManager相关描述
+* [[BTC-T-347](https://mcs.jetbrains.space/p/btc/issues/347)] JT-v2.1.15-新增日志相关Next指令
+* [[BTC-T-349](https://mcs.jetbrains.space/p/btc/issues/349)] JT-v2.1.15-新增SpineManager相关配置
+* [[BTC-T-351](https://mcs.jetbrains.space/p/btc/issues/351)] JT-v2.1.15-新增Mod相关Next指令
+* [[BTC-T-352](https://mcs.jetbrains.space/p/btc/issues/352)] JT-v2.1.15-新增Spine相关Next指令
+* [[BTC-T-356](https://mcs.jetbrains.space/p/btc/issues/356)] JT-v2.1.15-Log打印功能新增本地模式，以适配离线模式的日志打印功能
+* [[BTC-T-357](https://mcs.jetbrains.space/p/btc/issues/357)] JT-v2.1.15-DataManager相关功能
+    * [[BTC-T-358](https://mcs.jetbrains.space/p/btc/issues/358)] JT-v2.1.15-模型类数据创建
+    * [[BTC-T-359](https://mcs.jetbrains.space/p/btc/issues/359)] JT-v2.1.15-模型数据生成器创建
+    * [[BTC-T-360](https://mcs.jetbrains.space/p/btc/issues/360)] JT-v2.1.15-DataManager核心方法创建
+    * [[BTC-T-361](https://mcs.jetbrains.space/p/btc/issues/361)] JT-v2.1.15-数据构造器创建
+    * [[BTC-T-362](https://mcs.jetbrains.space/p/btc/issues/362)] JT-v2.1.15-数据构造器新增增强方法
+    * [[BTC-T-363](https://mcs.jetbrains.space/p/btc/issues/363)] JT-v2.1.15-DataManager数据加载优化
+    * [[BTC-T-364](https://mcs.jetbrains.space/p/btc/issues/364)] JT-v2.1.15-DataManager日志打印优化
+    * [[BTC-T-365](https://mcs.jetbrains.space/p/btc/issues/365)] JT-v2.1.15-修复Seid数据加载异常问题
+* [[BTC-T-366](https://mcs.jetbrains.space/p/btc/issues/366)] JT-v2.1.15-新增DataManager相关Next指令
+* [[BTC-T-369](https://mcs.jetbrains.space/p/btc/issues/369)] JT-v2.1.15-新增"天机大比"相关数据模型
+* [[BTC-T-370](https://mcs.jetbrains.space/p/btc/issues/370)] JT-v2.1.15-ArchiveManager相关功能
+* [[BTC-T-375](https://mcs.jetbrains.space/p/btc/issues/375)] JT-v2.1.15-新增请教相关的数据生成
+* [[BTC-T-381](https://mcs.jetbrains.space/p/btc/issues/381)] JT-v2.1.15-功法神通请教枚举类调整
+* [[BTC-T-382](https://mcs.jetbrains.space/p/btc/issues/382)] JT-v2.1.15-NpcPopManager相关功能
+* [[BTC-T-385](https://mcs.jetbrains.space/p/btc/issues/385)] JT-v2.1.15-数据加载操作添加异步处理
+* [[BTC-T-387](https://mcs.jetbrains.space/p/btc/issues/387)] JT-v2.1.15-Next数据载入优化处理
+* [[BTC-T-388](https://mcs.jetbrains.space/p/btc/issues/388)] JT-v2.1.15-调整NpcAvatar数据处理
+* [[BTC-T-389](https://mcs.jetbrains.space/p/btc/issues/389)] JT-v2.1.15-ArchiveUtil新增验证方法
+* [[BTC-T-391](https://mcs.jetbrains.space/p/btc/issues/391)] JT-v2.1.15-版本更新
+
+### Fix
+
+* [[BTC-T-336](https://mcs.jetbrains.space/p/btc/issues/336)] JT-v2.1.15-修复Spine动态立绘显示回调问题
+* [[BTC-T-377](https://mcs.jetbrains.space/p/btc/issues/377)] JT-v2.1.15-修复请教数据异常问题
+* [[BTC-T-379](https://mcs.jetbrains.space/p/btc/issues/379)] JT-v2.1.15-微调Spine位置及修改NPC流派称号默认配置
+
 ## [2.1.14] - 2024-05-03
 
 ### Features

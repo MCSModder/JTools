@@ -20,8 +20,7 @@ public class ItemSeidPatch
         var json = jsonData.instance.ItemsSeidJsonData[40][itemId.ToString()];
         var flowchartName = json.GetFieldStr("flowchart");
         var blockName = json.GetFieldStr("block");
-        FungusManager.Inst.TryGetFlowchart(flowchartName, out var flowchart);
-        flowchart.ExecuteBlock(blockName);
+        FungusManager.Inst.Execute(flowchartName, blockName);
 
         // 关闭背包
         if (SingletonMono<TabUIMag>.Instance != null) SingletonMono<TabUIMag>.Instance.TryEscClose();

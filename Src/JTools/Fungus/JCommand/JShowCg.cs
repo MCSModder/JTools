@@ -21,7 +21,7 @@ namespace TierneyJohn.MiChangSheng.JTools.Fungus.JCommand
         #region 构造方法
 
         /// <summary>
-        /// 显示 CG 指令
+        /// 显示静态 CG 指令
         /// </summary>
         /// <param name="cg">cg 图片名称</param>
         /// <returns>JShowCg 对象</returns>
@@ -50,11 +50,11 @@ namespace TierneyJohn.MiChangSheng.JTools.Fungus.JCommand
         {
             if (_sprite != null)
             {
-                CanvasManager.Inst.Show(_sprite);
+                CgManager.Inst.ShowCg(_sprite);
             }
             else
             {
-                CanvasManager.Inst.Show(_path);
+                CgManager.Inst.ShowCg(_path);
             }
 
             Continue();
